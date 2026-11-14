@@ -17,7 +17,7 @@ Akış kısaca şöyle: tek bir **base makine** kurulur, ondan **AMI** alınır,
 | `aws/03-rename-hosts.ps1` | Her makinenin hostname'ini kendi adına çevirir | CloudShell veya eğitmen bilgisayarı |
 | `aws/04-install-koi.ps1` | Koi'yi tüm makinelere kurar | CloudShell veya eğitmen bilgisayarı |
 | `aws/05-check.ps1` | Tüm makinelerin hazır olduğunu kontrol eder | CloudShell veya eğitmen bilgisayarı |
-| `aws/06-update-komutlar.ps1` | Güncel `komutlar.txt` ve "AES Lab Rehberi" kısayolunu tüm masaüstlerine dağıtır | CloudShell veya eğitmen bilgisayarı |
+| `aws/06-update-komutlar.ps1` | Güncel `komutlar.txt`, "AES Lab Rehberi" kısayolunu ve tarayıcı favorilerini tüm makinelere dağıtır | CloudShell veya eğitmen bilgisayarı |
 | `aws/07-list-instances.ps1` | Katılımcı listesini (`participants.csv`) çıkarır | CloudShell veya eğitmen bilgisayarı |
 | `aws/08-power.ps1` | Makineleri başlatır / durdurur | CloudShell veya eğitmen bilgisayarı |
 | `aws/99-cleanup.ps1` | Workshop sonrası makineleri (ve istenirse AMI'yi) siler | CloudShell veya eğitmen bilgisayarı |
@@ -100,6 +100,7 @@ Kurulum 15–20 dakika sürer. Script:
 - npm ve pip'i Koi gateway'ine yönlendirir
 - Koi Root CA ve PAC ayarına **dokunmaz** (katılımcılar Bölüm 0.3'te yapacak)
 - Masaüstüne `komutlar.txt`, **AES Konsol** ve **Proje Terminali** kısayollarını koyar
+- Chrome ve Edge yer imleri çubuğuna **AES Workshop** klasörünü ekler (içinde **AES Konsol** ve **AES Lab Rehberi**)
 
 
 Sondaki kontrol listesinde her satır `[OK]` olmalı; özellikle **npm registry = Koi gateway** ve **pip.ini = Koi gateway**. Script güvenle tekrar çalıştırılabilir.

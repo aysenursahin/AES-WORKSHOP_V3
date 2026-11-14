@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------
 # 06 - Masaustu dosyalarini tum makinelerde gunceller:
 #   - komutlar.txt (GitHub'dan)
-#   - "AES Lab Rehberi" kisayolu (LabGuideUrl)
+#   - "AES Lab Rehberi" kisayolu ve Chrome/Edge favorileri (LabGuideUrl)
 #   - C:\Projeler icin aes-user yazma yetkisi (npm install yonetici gerektirmesin)
 #
 # AMI'yi yeniden almadan tum makinelere dagitmak icin kullanin.
@@ -25,6 +25,25 @@ Write-Output "Guncellendi: `$dest (`$((Get-Item `$dest).Length) byte)"
 `$lnk = 'C:\Users\$WorkshopUser\Desktop\AES Lab Rehberi.url'
 [IO.File]::WriteAllText(`$lnk, "[InternetShortcut]``r``nURL=`$guide``r``n")
 Write-Output "Kisayol: `$lnk -> `$guide"
+# Tarayici favorileri: konsol adresi masaustundeki AES Konsol kisayolundan okunur
+`$console = ''
+`$consoleLnk = 'C:\Users\$WorkshopUser\Desktop\AES Konsol.url'
+if (Test-Path `$consoleLnk) {
+    `$m = Select-String -Path `$consoleLnk -Pattern '^URL=(.+)$' | Select-Object -First 1
+    if (`$m) { `$console = `$m.Matches[0].Groups[1].Value.Trim() }
+}
+`$bm = @(
+    @{ toplevel_name = 'AES Workshop' },
+    [ordered]@{ name = 'AES Konsol';      url = `$console },
+    [ordered]@{ name = 'AES Lab Rehberi'; url = `$guide }
+)
+`$json = ConvertTo-Json -InputObject `$bm -Compress
+foreach (`$key in @('HKLM:\SOFTWARE\Policies\Google\Chrome', 'HKLM:\SOFTWARE\Policies\Microsoft\Edge')) {
+    New-Item -Path `$key -Force | Out-Null
+    Set-ItemProperty -Path `$key -Name 'ManagedBookmarks'   -Value `$json -Type String
+    Set-ItemProperty -Path `$key -Name 'BookmarkBarEnabled' -Value 1      -Type DWord
+}
+Write-Output "Tarayici favorileri: AES Konsol -> `$console, AES Lab Rehberi -> `$guide"
 if (Test-Path 'C:\Projeler') {
     icacls.exe 'C:\Projeler' /grant '${WorkshopUser}:(OI)(CI)M' /T /C /Q | Out-Null
     Write-Output "C:\Projeler: $WorkshopUser icin yazma yetkisi verildi"

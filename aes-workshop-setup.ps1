@@ -384,6 +384,23 @@ Invoke-Step "Masaustu: Lab Rehberi kisayolu" {
     Write-TextFile (Join-Path $Desktop "AES Lab Rehberi.url") "[InternetShortcut]`r`nURL=$LabGuideUrl`r`n"
 }
 
+Invoke-Step "Tarayici favorileri: AES Konsol ve AES Lab Rehberi" {
+    # ManagedBookmarks politikasi: yer imleri cubugunda "AES Workshop" klasoru
+    # olarak gorunur. HKLM'ye yazildigi icin AMI'den acilan tum makinelerde ve
+    # Chrome profili henuz olusmamisken de calisir. Edge icin de ayni ayar.
+    $bookmarks = @(
+        @{ toplevel_name = "AES Workshop" },
+        [ordered]@{ name = "AES Konsol";      url = $KoiConsoleUrl },
+        [ordered]@{ name = "AES Lab Rehberi"; url = $LabGuideUrl }
+    )
+    $json = ConvertTo-Json -InputObject $bookmarks -Compress
+    foreach ($key in @("HKLM:\SOFTWARE\Policies\Google\Chrome", "HKLM:\SOFTWARE\Policies\Microsoft\Edge")) {
+        New-Item -Path $key -Force | Out-Null
+        Set-ItemProperty -Path $key -Name "ManagedBookmarks"   -Value $json -Type String
+        Set-ItemProperty -Path $key -Name "BookmarkBarEnabled" -Value 1     -Type DWord
+    }
+}
+
 Invoke-Step "Masaustu: proje terminali kisayolu" {
     $shell = New-Object -ComObject WScript.Shell
     $lnk = $shell.CreateShortcut((Join-Path $Desktop "Proje Terminali.lnk"))
@@ -415,6 +432,7 @@ $checks = [ordered]@{
     "Cursor MCP config"         = (Test-Path (Join-Path $WebProject ".cursor\mcp.json"))
     "Skill dosyasi"             = (Test-Path (Join-Path $env:USERPROFILE ".claude\skills\proje-ozeti\SKILL.md"))
     "buttoncontent KURULU DEGIL" = -not (Test-Path (Join-Path $WebProject "node_modules\buttoncontent"))
+    "Chrome favorileri (AES Workshop)" = ("$((Get-ItemProperty 'HKLM:\SOFTWARE\Policies\Google\Chrome' -ErrorAction SilentlyContinue).ManagedBookmarks)" -like "*AES Lab Rehberi*")
 }
 if ($NpmGatewayUrl) {
     $npmReg = (& npm.cmd config get registry 2>$null | Out-String).Trim()
