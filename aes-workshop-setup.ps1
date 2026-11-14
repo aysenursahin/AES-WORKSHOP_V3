@@ -58,7 +58,7 @@ param(
     [string]$PacUrl = "",
 
     # Lab rehberinin web surumu; masaustune kisayol olarak konur.
-    [string]$LabGuideUrl = "https://aes-workshop-v2.onrender.com",
+    [string]$LabGuideUrl = "https://aes-workshop-v3.onrender.com",
 
     # Katilimcilarin kullanacagi Windows kullanicisi; script bu kullaniciyla calistirilmali
     [string]$WorkshopUser = "aes-user"

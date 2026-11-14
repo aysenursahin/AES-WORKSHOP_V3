@@ -29,7 +29,7 @@ Katılımcılara dağıtılan rehber iki biçimde:
 - **PDF:** [`docs/AES Workshop Lab Rehberi.pdf`](docs/AES%20Workshop%20Lab%20Rehberi.pdf)
 - **Web:** [`site/`](site/) klasörü. Yan menü, kopyalanabilir komutlar ve bölüm ilerleme takibi içerir; telefonda da çalışır.
 
-**Web sürümünü Render'da yayınlamak:** [Render](https://render.com) → **New → Blueprint** → bu repoyu bağlayın → **Apply**. Repodaki [`render.yaml`](render.yaml) statik siteyi `site/` klasöründen yayınlar; adres `https://aes-workshop-v2.onrender.com` biçiminde olur (ad doluysa Render bir ek getirir). `main` dalına her gönderimde site otomatik güncellenir.
+**Web sürümünü Render'da yayınlamak:** [Render](https://render.com) → **New → Blueprint** → bu repoyu bağlayın → **Apply**. Repodaki [`render.yaml`](render.yaml) statik siteyi `site/` klasöründen yayınlar; adres `https://aes-workshop-v3.onrender.com` biçiminde olur (ad doluysa Render bir ek getirir). `main` dalına her gönderimde site otomatik güncellenir.
 
 ## Gereksinimler
 
@@ -86,9 +86,9 @@ Administrator oturumunu kapatın ve **`aes-user` ile** tekrar bağlanın (Window
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Set-ExecutionPolicy Bypass -Scope Process -Force
 $zip = "$env:TEMP\aes-workshop.zip"
-irm https://github.com/aysenursahin/AES-WORKSHOP_V2/archive/refs/heads/main.zip -OutFile $zip
+irm https://github.com/aysenursahin/AES-WORKSHOP_V3/archive/refs/heads/main.zip -OutFile $zip
 Expand-Archive $zip -DestinationPath "$env:TEMP\aes-workshop" -Force
-& "$env:TEMP\aes-workshop\AES-WORKSHOP_V2-main\aes-workshop-setup.ps1" `
+& "$env:TEMP\aes-workshop\AES-WORKSHOP_V3-main\aes-workshop-setup.ps1" `
     -KoiConsoleUrl  "https://<konsol-adresi>" `
     -NpmGatewayUrl  "https://koi-npmjs-<customer_subdomain>.gateway.koi.security" `
     -PypiGatewayUrl "https://koi-pypi-<customer_subdomain>.gateway.koi.security"
@@ -126,8 +126,8 @@ Sondaki kontrol listesinde her satır `[OK]` olmalı; özellikle **npm registry 
 **Seçenek A: AWS CloudShell (önerilen).** AWS konsolunda sağ üstteki **`>_`** simgesi. AWS CLI ve PowerShell hazır gelir, hesabınızla oturum açıktır; access key gerekmez. Bölgenin doğru olduğundan emin olun.
 
 ```bash
-git clone https://github.com/aysenursahin/AES-WORKSHOP_V2.git
-cd AES-WORKSHOP_V2/aws
+git clone https://github.com/aysenursahin/AES-WORKSHOP_V3.git
+cd AES-WORKSHOP_V3/aws
 cp config.example.ps1 config.ps1
 cp koi-install-command.example.ps1 koi-install-command.ps1
 nano config.ps1                     # kaydet: Ctrl+O, Enter; çık: Ctrl+X

@@ -2,7 +2,7 @@
 # Render > New > Blueprint > bu repoyu secin.
 services:
   - type: web
-    name: aes-workshop-v2
+    name: aes-workshop-v3
     runtime: static
     buildCommand: echo "Statik site, derleme gerekmiyor"
     staticPublishPath: ./site
