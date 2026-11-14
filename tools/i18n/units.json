@@ -407,7 +407,7 @@
 {
 "id": 81,
 "tag": "li",
-"html": "<span class=\"role role-soc\">SOC ADMIN</span> Açılan pencerenin solunda üç adım görünür: <strong>Set up network integration</strong>, <strong>Establish network trust</strong> ve <strong>Route network traffic</strong>. İlk adımda marketplace trafiğinin AES'e hangi yöntemle yönlendirileceği seçilir. Bu workshop'ta <strong>PAC file</strong> seçeneğini seçin ve <strong>Next</strong>'e tıklayın."
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Açılan pencerenin solunda dört adım görünür: <strong>Deployment method</strong>, <strong>Establish network trust</strong>, <strong>Route network traffic</strong> ve <strong>Route code packages</strong>. İlk adımda marketplace trafiğinin AES'e hangi yöntemle yönlendirileceği seçilir. <strong>Which of these products is available in your environment?</strong> sorusunda <strong>None of these</strong>'i seçin, <strong>Integration method</strong> altında <strong>PAC file</strong>'ın seçili olduğunu kontrol edin ve <strong>Next</strong>'e tıklayın."
 },
 {
 "id": 82,
