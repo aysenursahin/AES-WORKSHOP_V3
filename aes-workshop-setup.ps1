@@ -60,6 +60,9 @@ param(
     # Lab rehberinin web surumu; masaustune kisayol olarak konur.
     [string]$LabGuideUrl = "https://aes-workshop-v3.onrender.com/",
 
+    # Katilimcilarin workshop e-postalarini okuyacagi webmail (tarayici favorisi)
+    [string]$WebmailUrl = "https://webmail.torsque.com/",
+
     # Katilimcilarin kullanacagi Windows kullanicisi; script bu kullaniciyla calistirilmali
     [string]$WorkshopUser = "aes-user"
 )
@@ -384,14 +387,15 @@ Invoke-Step "Masaustu: Lab Rehberi kisayolu" {
     Write-TextFile (Join-Path $Desktop "AES Lab Rehberi.url") "[InternetShortcut]`r`nURL=$LabGuideUrl`r`n"
 }
 
-Invoke-Step "Tarayici favorileri: AES Konsol ve AES Lab Rehberi" {
+Invoke-Step "Tarayici favorileri: AES Konsol, AES Lab Rehberi, Webmail" {
     # ManagedBookmarks politikasi: yer imleri cubugunda "AES Workshop" klasoru
     # olarak gorunur. HKLM'ye yazildigi icin AMI'den acilan tum makinelerde ve
     # Chrome profili henuz olusmamisken de calisir. Edge icin de ayni ayar.
     $bookmarks = @(
         @{ toplevel_name = "AES Workshop" },
         [ordered]@{ name = "AES Konsol";      url = $KoiConsoleUrl },
-        [ordered]@{ name = "AES Lab Rehberi"; url = $LabGuideUrl }
+        [ordered]@{ name = "AES Lab Rehberi"; url = $LabGuideUrl },
+        [ordered]@{ name = "Webmail";         url = $WebmailUrl }
     )
     $json = ConvertTo-Json -InputObject $bookmarks -Compress
     foreach ($key in @("HKLM:\SOFTWARE\Policies\Google\Chrome", "HKLM:\SOFTWARE\Policies\Microsoft\Edge")) {

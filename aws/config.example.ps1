@@ -50,5 +50,8 @@ $KoiMsiBucket = ""
 # Lab rehberinin web adresi (06-update-komutlar.ps1 masaustune kisayol koyar)
 $LabGuideUrl = "https://aes-workshop-v3.onrender.com/"
 
+# Katilimcilarin workshop e-postalarini okuyacagi webmail (tarayici favorisi)
+$WebmailUrl = "https://webmail.torsque.com/"
+
 # Repo'nun raw adresi (06-update-komutlar.ps1 buradan ceker)
 $RepoRawBase = "https://raw.githubusercontent.com/aysenursahin/AES-WORKSHOP_V3/main"

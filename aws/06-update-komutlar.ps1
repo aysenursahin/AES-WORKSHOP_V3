@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------
 # 06 - Masaustu dosyalarini tum makinelerde gunceller:
 #   - komutlar.txt (GitHub'dan)
-#   - "AES Lab Rehberi" kisayolu ve Chrome/Edge favorileri (LabGuideUrl)
+#   - "AES Lab Rehberi" kisayolu ve Chrome/Edge favorileri (LabGuideUrl, WebmailUrl)
 #   - C:\Projeler icin aes-user yazma yetkisi (npm install yonetici gerektirmesin)
 #
 # AMI'yi yeniden almadan tum makinelere dagitmak icin kullanin.
@@ -35,7 +35,8 @@ if (Test-Path `$consoleLnk) {
 `$bm = @(
     @{ toplevel_name = 'AES Workshop' },
     [ordered]@{ name = 'AES Konsol';      url = `$console },
-    [ordered]@{ name = 'AES Lab Rehberi'; url = `$guide }
+    [ordered]@{ name = 'AES Lab Rehberi'; url = `$guide },
+    [ordered]@{ name = 'Webmail';         url = '$(if ($WebmailUrl) { $WebmailUrl } else { "https://webmail.torsque.com/" })' }
 )
 `$json = ConvertTo-Json -InputObject `$bm -Compress
 foreach (`$key in @('HKLM:\SOFTWARE\Policies\Google\Chrome', 'HKLM:\SOFTWARE\Policies\Microsoft\Edge')) {

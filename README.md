@@ -100,7 +100,7 @@ Kurulum 15–20 dakika sürer. Script:
 - npm ve pip'i Koi gateway'ine yönlendirir
 - Koi Root CA ve PAC ayarına **dokunmaz** (katılımcılar Bölüm 0.3'te yapacak)
 - Masaüstüne `komutlar.txt`, **AES Konsol** ve **Proje Terminali** kısayollarını koyar
-- Chrome ve Edge yer imleri çubuğuna **AES Workshop** klasörünü ekler (içinde **AES Konsol** ve **AES Lab Rehberi**)
+- Chrome ve Edge yer imleri çubuğuna **AES Workshop** klasörünü ekler (içinde **AES Konsol**, **AES Lab Rehberi** ve **Webmail**)
 
 
 Sondaki kontrol listesinde her satır `[OK]` olmalı; özellikle **npm registry = Koi gateway** ve **pip.ini = Koi gateway**. Script güvenle tekrar çalıştırılabilir.
