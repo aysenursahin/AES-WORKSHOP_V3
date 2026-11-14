@@ -95,6 +95,10 @@ def build(lang):
         new = 'document.getElementById("progText").textContent = n + " / " + boxes.length + "%s";' % X["progress_suffix"]
     html = html.replace(old, new)
     html = html.replace('<strong>Deploy the PAC File</strong> bölümündeki <strong>Windows</strong> adımlarını lab makinesinde uygulayın:', X["pac_step"])
+    import sys as _s; _s.path.insert(0, HERE); import table3
+    cap = {"en": "Table 3:", "ru": "Таблица 3:"}[lang]
+    i = html.find("<caption>" + cap); a = html.find("<tbody>", i); e = html.find("</tbody>", a) + 8
+    html = html[:a] + table3.tbody(lang) + html[e:]
     html = add_common(html, lang)
     import os
     os.makedirs(f"{SITE}/{lang}", exist_ok=True)
