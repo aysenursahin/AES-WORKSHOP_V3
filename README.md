@@ -89,7 +89,7 @@ $zip = "$env:TEMP\aes-workshop.zip"
 irm https://github.com/aysenursahin/AES-WORKSHOP_V3/archive/refs/heads/main.zip -OutFile $zip
 Expand-Archive $zip -DestinationPath "$env:TEMP\aes-workshop" -Force
 & "$env:TEMP\aes-workshop\AES-WORKSHOP_V3-main\aes-workshop-setup.ps1" `
-    -KoiConsoleUrl  "https://<konsol-adresi>" `
+    -KoiConsoleUrl  "https://tstc.koi.security/" `
     -NpmGatewayUrl  "https://koi-npmjs-<customer_subdomain>.gateway.koi.security" `
     -PypiGatewayUrl "https://koi-pypi-<customer_subdomain>.gateway.koi.security"
 ```

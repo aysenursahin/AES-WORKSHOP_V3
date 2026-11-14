@@ -14,7 +14,7 @@
       Elle calistirmak icin (repo klasorunde, yonetici PowerShell):
            Set-ExecutionPolicy Bypass -Scope Process -Force
            .\aes-workshop-setup.ps1 `
-               -KoiConsoleUrl  "https://<konsol-adresi>" `
+               -KoiConsoleUrl  "https://tstc.koi.security/" `
                -NpmGatewayUrl  "https://koi-npmjs-<customer_subdomain>.gateway.koi.security" `
                -PypiGatewayUrl "https://koi-pypi-<customer_subdomain>.gateway.koi.security"
 
@@ -32,7 +32,7 @@
 [CmdletBinding()]
 param(
     # Koi konsol adresi (masaustu kisayolu icin)
-    [string]$KoiConsoleUrl = "https://KOI-KONSOL-ADRESINIZ",
+    [string]$KoiConsoleUrl = "https://tstc.koi.security/",
 
     # Provada secilecek "az bilinen yayinci" AI eklentisinin ID'si (or. publisher.extension).
     # Bos birakilirsa atlanir.
