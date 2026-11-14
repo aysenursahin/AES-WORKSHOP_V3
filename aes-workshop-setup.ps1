@@ -54,9 +54,10 @@ param(
     # Marketplace trafigi (Chrome Web Store, VS Code Marketplace) icin Koi Root CA
     # dosyasi ve PAC adresi. Ikisini de AES konsolunda Settings > Deployment >
     # Network Routing adimlarindan alin (Download CA ve PAC file URL).
-    # Katilimcilar bu ayari yapmaz; base makinede mutlaka verin.
+    # Katilimcilar bu ayari yapmaz; base makinede kurulur.
+    # KoiRootCaFile bos birakilirsa repodaki certs\ klasorundeki sertifika kullanilir.
     [string]$KoiRootCaFile = "",
-    [string]$PacUrl = "",
+    [string]$PacUrl = "https://assets.koi.security/pac/ef80f1d9-1892-4db9-ab62-9fff8874b0d2.pac",
 
     # Lab rehberinin web surumu; masaustune kisayol olarak konur.
     [string]$LabGuideUrl = "https://aes-workshop-v3.onrender.com/",
@@ -346,6 +347,15 @@ if ($PypiGatewayUrl) {
 # C6. Marketplace trafigi: Koi Root CA ve PAC dosyasi
 # Katilimcilar bu ayari yapmaz; base makinede yapilir ve AMI ile tum makinelere gelir.
 # ---------------------------------------------------------------------------
+# Parametre verilmediyse repodaki certs\ klasorundeki sertifikayi kullan
+if (-not $KoiRootCaFile) {
+    $repoCa = Get-ChildItem -Path (Join-Path $PSScriptRoot "certs") -File -ErrorAction SilentlyContinue |
+        Where-Object { @(".pem", ".cer", ".crt") -contains $_.Extension.ToLower() } | Select-Object -First 1
+    if ($repoCa) {
+        $KoiRootCaFile = $repoCa.FullName
+        Write-Host "`n==> Repodaki sertifika kullaniliyor: certs\$($repoCa.Name)" -ForegroundColor Cyan
+    }
+}
 if ($KoiRootCaFile) {
     Invoke-Step "Koi Root CA -> Trusted Root Certification Authorities" {
         if (-not (Test-Path $KoiRootCaFile)) { throw "CA dosyasi bulunamadi: $KoiRootCaFile" }

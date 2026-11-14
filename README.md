@@ -43,7 +43,7 @@ Katılımcılara dağıtılan rehber iki biçimde:
 - Deployment Portal'dan:
   - Windows kurulum komutu: **Manual → Windows → Installed → Script Package**
   - npm ve PyPI gateway adresleri: `https://koi-npmjs-<customer_subdomain>.gateway.koi.security`, `https://koi-pypi-<customer_subdomain>.gateway.koi.security`
-- **Network Routing:** AES konsolunda **Settings → Deployment → Network Routing** adımlarından **Koi Root CA** dosyasını (**Download CA**) ve **PAC file** adresini alın. İkisi base makinede kurulur ve AMI ile tüm katılımcı makinelerine gelir; katılımcılar bu ayarı yapmaz. Base makinede CA dosyasını örneğin `C:\WorkshopSetup\koi-root-ca.crt` olarak kaydedin.
+- **Network Routing:** Koi Root CA (`certs/tstc_koi_ca.pem`) ve PAC adresi base makinede kurulur ve AMI ile tüm katılımcı makinelerine gelir; katılımcılar bu ayarı yapmaz. Başka bir tenant için ikisini AES konsolunda **Settings → Deployment → Network Routing** adımlarından alın (**Download CA** ve **PAC file** adresi).
 
 ---
 
@@ -91,10 +91,10 @@ Expand-Archive $zip -DestinationPath "$env:TEMP\aes-workshop" -Force
 & "$env:TEMP\aes-workshop\AES-WORKSHOP_V3-main\aes-workshop-setup.ps1" `
     -KoiConsoleUrl  "https://tstc.koi.security/" `
     -NpmGatewayUrl  "https://koi-npmjs-<customer_subdomain>.gateway.koi.security" `
-    -PypiGatewayUrl "https://koi-pypi-<customer_subdomain>.gateway.koi.security" `
-    -KoiRootCaFile  "C:\WorkshopSetup\koi-root-ca.crt" `
-    -PacUrl         "<konsoldaki PAC file adresi>"
+    -PypiGatewayUrl "https://koi-pypi-<customer_subdomain>.gateway.koi.security"
 ```
+
+Koi Root CA ve PAC adresi için parametre vermenize gerek yok: script [`certs/`](certs/) klasöründeki sertifikayı (`tstc_koi_ca.pem`) ve varsayılan PAC adresini (`https://assets.koi.security/pac/ef80f1d9-1892-4db9-ab62-9fff8874b0d2.pac`) kullanır. Tenant değişirse `-KoiRootCaFile "<yol>"` ve `-PacUrl "<adres>"` ile verin.
 
 Kurulum 15–20 dakika sürer. Script:
 - Chrome, VS Code, Node.js, Python, Git, VS Code extension'ları, Claude Code ve Codex CLI'ı kurar
