@@ -2,7 +2,8 @@
 # 05 - Tum makinelerin workshop'a hazir olup olmadigini kontrol eder
 #
 # Her makine icin: hostname, Koi servisi, npm ve pip'in Koi gateway'ine
-# yonlenmesi, masaustunde komutlar.txt ve buttoncontent'in KURULU OLMAMASI.
+# yonlenmesi, Koi Root CA, PAC ayari, masaustunde komutlar.txt ve
+# buttoncontent'in KURULU OLMAMASI.
 # Workshop sabahi da calistirin.
 # ---------------------------------------------------------------------------
 param([string[]]$Only)
@@ -26,9 +27,15 @@ foreach (`$f in @("C:\Users\`$u\AppData\Roaming\npm\etc\npmrc", "C:\Users\`$u\.n
 `$pipOk = (Test-Path `$pipIni) -and ((Get-Content `$pipIni -Raw) -like '*gateway.koi.security*')
 `$komutlar = Test-Path "C:\Users\`$u\Desktop\komutlar.txt"
 `$blocked = Test-Path 'C:\Projeler\bogazici-web\node_modules\buttoncontent'
+`$sid = (New-Object System.Security.Principal.NTAccount(`$u)).Translate([System.Security.Principal.SecurityIdentifier]).Value
+`$hive = "Registry::HKEY_USERS\`$sid"; `$tmp = `$false
+if (-not (Test-Path `$hive)) { reg.exe load 'HKU\aes_tmp' "C:\Users\`$u\NTUSER.DAT" | Out-Null; `$hive = 'Registry::HKEY_USERS\aes_tmp'; `$tmp = `$true }
+`$pac = (Get-ItemProperty "`$hive\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -ErrorAction SilentlyContinue).AutoConfigURL
+if (`$tmp) { [gc]::Collect(); reg.exe unload 'HKU\aes_tmp' | Out-Null }
+`$ca = [bool](Get-ChildItem Cert:\LocalMachine\Root | Where-Object { `$_.Subject -like '*Koi*' })
 
-Write-Output ("Koi={0} | npm->Koi={1} | pip->Koi={2} | komutlar.txt={3} | buttoncontent kurulu={4}" -f `$koi, `$npmOk, `$pipOk, `$komutlar, `$blocked)
-`$ok = (`$koi -eq 'Running') -and `$npmOk -and `$pipOk -and `$komutlar -and (-not `$blocked) -and (`$env:COMPUTERNAME -like '$NamePrefix*')
+Write-Output ("Koi={0} | npm->Koi={1} | pip->Koi={2} | RootCA={3} | PAC={4} | komutlar.txt={5} | buttoncontent kurulu={6}" -f `$koi, `$npmOk, `$pipOk, `$ca, [bool]`$pac, `$komutlar, `$blocked)
+`$ok = (`$koi -eq 'Running') -and `$npmOk -and `$pipOk -and `$ca -and [bool]`$pac -and `$komutlar -and (-not `$blocked) -and (`$env:COMPUTERNAME -like '$NamePrefix*')
 if (-not `$ok) { Write-Output "Hostname=`$env:COMPUTERNAME"; exit 1 }
 "@
 

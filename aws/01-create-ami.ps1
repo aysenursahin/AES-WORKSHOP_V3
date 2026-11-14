@@ -11,6 +11,7 @@ Assert-Configured @("BaseInstanceId", "AmiName")
 Write-Host "Base makine: $BaseInstanceId" -ForegroundColor Cyan
 Write-Host "  - aes-workshop-setup.ps1 calisti ve tum kontroller [OK] mi?"
 Write-Host "  - Claude Desktop, Cursor ve Chrome extension'lari kuruldu mu?"
+Write-Host "  - Koi Root CA ve PAC ayarli mi, /koi dogrulama sayfasi aciliyor mu?"
 Write-Host "  - Koi bu makinede KURULU DEGIL mi?"
 # Base makineyi SSM ile kontrol et (SSM rolu yoksa kontrol atlanir)
 $baseInst = [pscustomobject]@{ Name = "base"; InstanceId = $BaseInstanceId }
@@ -22,7 +23,14 @@ if ($info.InstanceInformationList -and $info.InstanceInformationList[0].PingStat
 `$p = @()
 if (-not (Test-Path "C:\Users\`$u\Desktop\komutlar.txt")) { `$p += "`$u masaustunde komutlar.txt yok (kurulum `$u ile yapilmamis)" }
 if (Get-WmiObject Win32_UserAccount -Filter "LocalAccount=True AND Name='wsuser'") { `$p += "eski 'wsuser' kullanicisi var (V1 base makinesi)" }
-if (Get-ChildItem Cert:\LocalMachine\Root | Where-Object { `$_.Subject -like '*Koi*' }) { `$p += "Koi Root CA makinede kurulu (katilimcilar kendisi kuracak)" }
+`$sid = (New-Object System.Security.Principal.NTAccount(`$u)).Translate([System.Security.Principal.SecurityIdentifier]).Value
+`$hive = "Registry::HKEY_USERS\`$sid"; `$tmp = `$false
+if (-not (Test-Path `$hive)) { reg.exe load 'HKU\aes_tmp' "C:\Users\`$u\NTUSER.DAT" | Out-Null; `$hive = 'Registry::HKEY_USERS\aes_tmp'; `$tmp = `$true }
+`$pac = (Get-ItemProperty "`$hive\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -ErrorAction SilentlyContinue).AutoConfigURL
+if (`$tmp) { [gc]::Collect(); reg.exe unload 'HKU\aes_tmp' | Out-Null }
+`$ca = [bool](Get-ChildItem Cert:\LocalMachine\Root | Where-Object { `$_.Subject -like '*Koi*' })
+if (-not `$ca) { `$p += "Koi Root CA kurulu degil (setup script'ini -KoiRootCaFile ile calistirin)" }
+if (-not `$pac) { `$p += "`$u icin PAC adresi ayarli degil (setup script'ini -PacUrl ile calistirin)" }
 if (`$p.Count) { `$p | ForEach-Object { Write-Output "SORUN: `$_" }; exit 1 }
 Write-Output "Base makine temiz"
 "@

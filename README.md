@@ -43,7 +43,7 @@ Katılımcılara dağıtılan rehber iki biçimde:
 - Deployment Portal'dan:
   - Windows kurulum komutu: **Manual → Windows → Installed → Script Package**
   - npm ve PyPI gateway adresleri: `https://koi-npmjs-<customer_subdomain>.gateway.koi.security`, `https://koi-pypi-<customer_subdomain>.gateway.koi.security`
-- **v2 farkı:** Koi Root CA ve PAC (proxy) ayarı base makinede yapılmaz. Katılımcılar workshop başında AES konsolunda **Settings → Deployment → Network Routing** adımlarını izleyerek kendileri yapar (lab rehberi Bölüm 0.3). Katılımcıların lab makinesinden konsola girip sertifikayı indirebilmesi gerekir.
+- **Network Routing:** AES konsolunda **Settings → Deployment → Network Routing** adımlarından **Koi Root CA** dosyasını (**Download CA**) ve **PAC file** adresini alın. İkisi base makinede kurulur ve AMI ile tüm katılımcı makinelerine gelir; katılımcılar bu ayarı yapmaz. Base makinede CA dosyasını örneğin `C:\WorkshopSetup\koi-root-ca.crt` olarak kaydedin.
 
 ---
 
@@ -91,31 +91,33 @@ Expand-Archive $zip -DestinationPath "$env:TEMP\aes-workshop" -Force
 & "$env:TEMP\aes-workshop\AES-WORKSHOP_V3-main\aes-workshop-setup.ps1" `
     -KoiConsoleUrl  "https://tstc.koi.security/" `
     -NpmGatewayUrl  "https://koi-npmjs-<customer_subdomain>.gateway.koi.security" `
-    -PypiGatewayUrl "https://koi-pypi-<customer_subdomain>.gateway.koi.security"
+    -PypiGatewayUrl "https://koi-pypi-<customer_subdomain>.gateway.koi.security" `
+    -KoiRootCaFile  "C:\WorkshopSetup\koi-root-ca.crt" `
+    -PacUrl         "<konsoldaki PAC file adresi>"
 ```
 
 Kurulum 15–20 dakika sürer. Script:
 - Chrome, VS Code, Node.js, Python, Git, VS Code extension'ları, Claude Code ve Codex CLI'ı kurar
 - Örnek projeleri, MCP config'lerini, örnek skill'i ve sahte `.env` dosyasını oluşturur
 - npm ve pip'i Koi gateway'ine yönlendirir
-- Koi Root CA ve PAC ayarına **dokunmaz** (katılımcılar Bölüm 0.3'te yapacak)
+- Koi Root CA'yı makinenin Trusted Root deposuna ekler ve `aes-user` için PAC adresini ayarlar (marketplace trafiği AES proxy'sinden geçer)
 - Masaüstüne `komutlar.txt`, **AES Konsol** ve **Proje Terminali** kısayollarını koyar
 - Chrome ve Edge yer imleri çubuğuna **AES Workshop** klasörünü ekler (içinde **AES Konsol**, **AES Lab Rehberi** ve **Webmail**)
 
 
-Sondaki kontrol listesinde her satır `[OK]` olmalı; özellikle **npm registry = Koi gateway** ve **pip.ini = Koi gateway**. Script güvenle tekrar çalıştırılabilir.
+Sondaki kontrol listesinde her satır `[OK]` olmalı; özellikle **npm registry = Koi gateway**, **pip.ini = Koi gateway**, **Koi Root CA guvenilir** ve **PAC dosyasi ayarli**. Script güvenle tekrar çalıştırılabilir.
 
 **Ardından elle:**
 
 1. **Claude Desktop** ve **Cursor**'u kurun: [claude.ai/download](https://claude.ai/download), [cursor.com/download](https://cursor.com/download). Cursor için **User Setup, x64** sürümü. İkisini de `aes-user` ile kurun.
 2. Uygulamaları (Chrome, VS Code, Cursor, Claude Desktop) bir kez açıp ilk açılış ekranlarını kapatın. Giriş ekranı çıkarsa **giriş yapmayın** (aşağıdaki uyarıya bakın).
 3. **Chrome'a 3–4 popüler extension kurun.** Lab rehberi Bölüm 2'de kullanılan **Hulu Ad Skipper | Ad Blocker [QVI]** ve **Checker Plus for Gmail**'i kurmayın.
-4. Makineyi yeniden başlatın.
+4. Chrome'u kapatıp açın ve `https://marketplace.visualstudio.com/koi` adresinde **You Are Routing Through Koi!** sayfasının açıldığını kontrol edin.
+5. Makineyi yeniden başlatın.
 
-> **v1 base makinesini kullanmayın.** Kurulum script'i `wsuser` olan bir makinede ya da `aes-user` dışında bir kullanıcıyla çalıştırılırsa durur; `01-create-ami.ps1` de base makinede `wsuser`, Koi Root CA ya da eksik `aes-user` kurulumu görürse AMI almaz. v1'de kullanıcı adı `wsuser` idi ve Koi Root CA ile PAC ayarı makineye kuruluydu. v2 için yeni bir base makine açıp yukarıdaki adımları `aes-user` ile uygulayın ve yeni bir AMI alın.
+> **v1 base makinesini kullanmayın.** Kurulum script'i `wsuser` olan bir makinede ya da `aes-user` dışında bir kullanıcıyla çalıştırılırsa durur; `01-create-ami.ps1` de base makinede `wsuser` görürse, `aes-user` kurulumu eksikse ya da Koi Root CA veya PAC ayarı yoksa AMI almaz. v1'de kullanıcı adı `wsuser` idi. Bu sürüm için yeni bir base makine açıp yukarıdaki adımları `aes-user` ile uygulayın ve yeni bir AMI alın.
 
 > **Base makineye bunları KOYMAYIN.** Base makinede ne varsa AMI ile tüm katılımcı makinelerine kopyalanır:
-> - **Koi Root CA ve PAC:** Katılımcılar Bölüm 0.3'te kendileri kuracak.
 > - **AES/Koi:** Klonlar aynı cihaz kimliğini taşıyabilir ve konsolda tek makine gibi görünür. AES 5. adımda her makineye ayrı kurulur.
 > - **Kişisel hesaplar:** Cursor, Claude Desktop, Chrome veya GitHub'da giriş yapmayın; oturumunuz tüm katılımcılara kopyalanır.
 > - **AWS anahtarları:** `aws/` script'lerini base makinede çalıştırmayın (3. adım).
@@ -232,8 +234,8 @@ Base makineye dokunulmaz; ayrıca silmeniz gerekir.
 | `net localgroup ... ` → `The user name could not be found` (2221) | Kullanıcı oluşmamış; büyük ihtimalle şifre kurallara uymadı. `net user aes-user * /add /expires:never` komutunu daha güçlü bir şifreyle tekrar çalıştırın. |
 | AWS girişinde **IAM user sign in** ekranı | Hesabı e-postayla açtıysanız **Sign in using root user email**'e tıklayın |
 | Kurulumda `PowerShell execution policy` adımı `Security error` | Eski script sürümünde yanlış alarmdı; ayar uygulanır. `Get-ExecutionPolicy -List`'te `LocalMachine` = `RemoteSigned` olmalı. |
-| `/koi` sayfasında sertifika hatası | Koi Root CA kurulmamış. Katılımcı Bölüm 0.3'teki `certutil -user -addstore` adımını tekrarlamalı; kontrol: `certmgr.msc` → Trusted Root Certification Authorities |
-| `/koi` yerine normal marketplace sayfası | PAC uygulanmamış ya da tarayıcı yeniden başlatılmamış. Windows Ayarlar → Network & Internet → Proxy → **Use setup script** açık olmalı. |
+| `/koi` sayfasında sertifika hatası | Koi Root CA kurulmamış. Base makinede setup script'ini `-KoiRootCaFile` ile tekrar çalıştırıp yeni AMI alın; kontrol: `certlm.msc` → Trusted Root Certification Authorities. `05-check.ps1` bu durumda `RootCA=False` gösterir. |
+| `/koi` yerine normal marketplace sayfası | PAC uygulanmamış ya da tarayıcı yeniden başlatılmamış. Windows Ayarlar → Network & Internet → Proxy → **Use setup script** açık ve adres dolu olmalı. `05-check.ps1` bu durumda `PAC=False` gösterir. |
 | Cursor / Claude Desktop giriş istiyor | Base makinede giriş yapmayın; pencereyi kapatın. Inventory için kurulu olmaları yeterli. |
 | Chrome kurulumu checksum hatası veriyor | Script Chrome için checksum kontrolünü atlıyor; güncel script'i kullandığınızdan emin olun |
 

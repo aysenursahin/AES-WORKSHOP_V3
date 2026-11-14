@@ -302,7 +302,7 @@
 {
 "id": 60,
 "tag": "p",
-"html": "Bu bölümde lab makinenize bağlanacak, AES konsoluna giriş yapacak ve marketplace trafiğini AES üzerinden geçirmek için gereken sertifika ve proxy ayarlarını AES konsolundaki adımları izleyerek kendiniz yapacaksınız."
+"html": "Bu bölümde lab makinenize bağlanacak, AES konsoluna giriş yapacak ve marketplace trafiğinin AES üzerinden nasıl geçtiğini göreceksiniz."
 },
 {
 "id": 61,
@@ -387,12 +387,12 @@
 {
 "id": 77,
 "tag": "h3",
-"html": "0.3 Network Routing: sertifika ve proxy ayarı"
+"html": "0.3 Network Routing"
 },
 {
 "id": 78,
 "tag": "p",
-"html": "Chrome Web Store ve VS Code Marketplace gibi marketplace'lerin trafiği bir PAC dosyasıyla AES proxy'sine yönlendirilir. Proxy'nin bu trafiği inceleyebilmesi için makinenin AES Root CA sertifikasına güvenmesi gerekir. Sertifikayı ve PAC dosyasının adresini AES konsolundan alacaksınız."
+"html": "Chrome Web Store ve VS Code Marketplace gibi marketplace'lerin trafiği bir PAC dosyasıyla AES proxy'sine yönlendirilir. Proxy'nin bu trafiği inceleyebilmesi için makinenin AES Root CA sertifikasına güvenmesi gerekir. Lab makinelerinde sertifika ve PAC ayarı önceden yapılmıştır; bu bölümde bir ayar yapmanız gerekmez."
 },
 {
 "id": 79,
@@ -817,7 +817,7 @@
 {
 "id": 163,
 "tag": "p",
-"html": "<span class=\"note-tag\">Not</span>Bu akış, Bölüm 0.3'te yaptığınız proxy ve sertifika ayarı sayesinde çalışır. Marketplace trafiği AES proxy'sinden geçmezse kurulum engellenmez."
+"html": "<span class=\"note-tag\">Not</span>Bu akış, lab makinelerinde önceden yapılmış proxy ve sertifika ayarı sayesinde çalışır (Bölüm 0.3). Marketplace trafiği AES proxy'sinden geçmezse kurulum engellenmez."
 },
 {
 "id": 164,
@@ -1097,7 +1097,7 @@
 {
 "id": 219,
 "tag": "caption",
-"html": "Tablo 4: Guardrail'ler"
+"html": "Tablo 3: Guardrail'ler"
 },
 {
 "id": 220,
@@ -1532,7 +1532,7 @@
 {
 "id": 306,
 "tag": "caption",
-"html": "Tablo 5: Sorular ve cevapları"
+"html": "Tablo 4: Sorular ve cevapları"
 },
 {
 "id": 307,

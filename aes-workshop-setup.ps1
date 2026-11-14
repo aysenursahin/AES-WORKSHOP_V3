@@ -51,9 +51,10 @@ param(
     # Bos birakilirsa pip yonlendirmesi atlanir.
     [string]$PypiGatewayUrl = "",
 
-    # v2: Koi Root CA ve PAC ayarini katilimcilar workshop basinda konsoldan
-    # (Settings > Deployment > Network Routing) kendileri yapar. Base makinede
-    # bu iki parametreyi BOS birakin. Yalnizca test/prova icin kullanin.
+    # Marketplace trafigi (Chrome Web Store, VS Code Marketplace) icin Koi Root CA
+    # dosyasi ve PAC adresi. Ikisini de AES konsolunda Settings > Deployment >
+    # Network Routing adimlarindan alin (Download CA ve PAC file URL).
+    # Katilimcilar bu ayari yapmaz; base makinede mutlaka verin.
     [string]$KoiRootCaFile = "",
     [string]$PacUrl = "",
 
@@ -94,12 +95,6 @@ if ($oldUsers.Count -gt 0) {
     Write-Host "HATA: Bu makinede eski workshop kullanicisi var: $($oldUsers.Name -join ', ')." -ForegroundColor Red
     Write-Host "Bu makine V1 base makinesi. Yeni bir Windows makine acip README'deki adimlari uygulayin." -ForegroundColor Red
     exit 1
-}
-# V1'den kalmis Koi Root CA varsa kaldir (v2'de katilimcilar kendisi kuruyor)
-$oldCa = @(Get-ChildItem Cert:\LocalMachine\Root | Where-Object { $_.Subject -like "*Koi*" })
-if ($oldCa.Count -gt 0 -and -not $KoiRootCaFile) {
-    foreach ($c in $oldCa) { certutil.exe -delstore Root $c.Thumbprint | Out-Null }
-    Write-Host "Not: Makine genelindeki eski Koi Root CA kaldirildi." -ForegroundColor Yellow
 }
 
 $SetupDir    = "C:\WorkshopSetup"
@@ -349,7 +344,7 @@ if ($PypiGatewayUrl) {
 
 # ---------------------------------------------------------------------------
 # C6. Marketplace trafigi: Koi Root CA ve PAC dosyasi
-# v2'de katilimcilar bunu Bolum 0.3'te kendileri yapar; parametre verilmezse atlanir.
+# Katilimcilar bu ayari yapmaz; base makinede yapilir ve AMI ile tum makinelere gelir.
 # ---------------------------------------------------------------------------
 if ($KoiRootCaFile) {
     Invoke-Step "Koi Root CA -> Trusted Root Certification Authorities" {
@@ -357,10 +352,12 @@ if ($KoiRootCaFile) {
         Invoke-Native "certutil.exe" @("-addstore", "-f", "Root", $KoiRootCaFile)
     }
 } else {
-    Write-Host "`n==> Koi Root CA ve PAC atlandi: katilimcilar Bolum 0.3'te konsoldan kuracak." -ForegroundColor Cyan
+    Write-Host "`n==> UYARI: -KoiRootCaFile verilmedi. Marketplace trafigi AES'ten gecemez; AMI almadan once script'i bu parametreyle tekrar calistirin." -ForegroundColor Yellow
 }
 
-if ($PacUrl) {
+if (-not $PacUrl) {
+    Write-Host "`n==> UYARI: -PacUrl verilmedi. Marketplace trafigi AES'ten gecemez; AMI almadan once script'i bu parametreyle tekrar calistirin." -ForegroundColor Yellow
+} else {
     Invoke-Step "PAC dosyasi (otomatik proxy yapilandirmasi)" {
         $key = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
         Set-ItemProperty -Path $key -Name "AutoConfigURL" -Value $PacUrl
@@ -456,11 +453,11 @@ if ($PypiGatewayUrl) {
 if ($KoiRootCaFile -and (Test-Path $KoiRootCaFile)) {
     $caThumb = (New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($KoiRootCaFile)).Thumbprint
     $checks["Koi Root CA guvenilir"] = [bool](Get-ChildItem Cert:\LocalMachine\Root | Where-Object { $_.Thumbprint -eq $caThumb })
+} else {
+    $checks["Koi Root CA guvenilir"] = [bool](Get-ChildItem Cert:\LocalMachine\Root | Where-Object { $_.Subject -like "*Koi*" })
 }
-if ($PacUrl) {
-    $pac = (Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -ErrorAction SilentlyContinue).AutoConfigURL
-    $checks["PAC dosyasi ayarli"] = ($pac -eq $PacUrl)
-}
+$pac = (Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -ErrorAction SilentlyContinue).AutoConfigURL
+$checks["PAC dosyasi ayarli"] = if ($PacUrl) { $pac -eq $PacUrl } else { [bool]$pac }
 foreach ($k in $checks.Keys) {
     $color = if ($checks[$k]) { "Green" } else { "Red" }
     $mark  = if ($checks[$k]) { "[OK]  " } else { "[YOK] " }
@@ -492,7 +489,8 @@ Write-Host @"
      (Bolum 2'de "Request Approval" gosterilecek eklentiyi KURMAYIN.)
   4. Chrome ve VS Code'u bir kez acip ilk calistirma ekranlarini kapatin.
   5. Makineyi yeniden baslatin.
-  6. Koi Root CA ve PAC ayarini YAPMAYIN (katilimcilar Bolum 0.3'te yapacak).
+  6. Chrome'u kapatip acin ve https://marketplace.visualstudio.com/koi adresinde
+     "You Are Routing Through Koi!" sayfasinin acildigini kontrol edin.
   7. KOI'YI KURMADAN AMI alin: aws\01-create-ami.ps1
 "@ -ForegroundColor Yellow
 
