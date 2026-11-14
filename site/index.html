@@ -109,6 +109,13 @@ footer b { color: var(--green-dk); }
   .sec { break-inside: auto; }
   .code pre { padding-right: 16px; }
 }
+.lang { display: flex; gap: 6px; margin: 0 0 18px; }
+.lang a { flex: 1; text-align: center; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; font-size: 13px; font-weight: 600;
+          color: var(--ink); text-decoration: none; background: #fff; }
+.lang a:hover { border-color: var(--green); }
+.lang a.cur { background: var(--green-dk); border-color: var(--green-dk); color: #fff; }
+@media (max-width: 900px) { .lang { margin-bottom: 12px; } }
+@media print { .lang { display: none !important; } }
 </style>
 </head>
 <body>
@@ -116,6 +123,7 @@ footer b { color: var(--green-dk); }
 <img class="banner" src="assets/banner.jpg" alt="Palo Alto Networks Cortex">
 <div class="layout">
   <aside class="side" id="side">
+    <nav class="lang" aria-label="Language"><a href="./" hreflang="tr" lang="tr" class="cur" aria-current="page">Türkçe</a><a href="en/" hreflang="en" lang="en">English</a><a href="ru/" hreflang="ru" lang="ru">Русский</a></nav>
     <button class="btn menu-btn" type="button" id="menuBtn" aria-expanded="false">Bölümler <span aria-hidden="true">▾</span></button>
     <div class="side-body">
       <p class="side-title">Bölümler</p>
@@ -197,6 +205,12 @@ footer b { color: var(--green-dk); }
     });
   });
   refresh();
+
+
+  // Dil degistirirken ayni bolumde kal
+  document.querySelectorAll(".lang a").forEach(function (a) {
+    a.addEventListener("click", function () { if (location.hash) a.href = a.getAttribute("href").split("#")[0] + location.hash; });
+  });
 
   // Mobil menu
   var side = document.getElementById("side"), mb = document.getElementById("menuBtn");

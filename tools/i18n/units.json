@@ -1,0 +1,1687 @@
+[
+{
+"id": 0,
+"tag": "div",
+"html": "Cortex by Palo Alto Networks · AES Workshop · Lab Rehberi · Created by Aysenur Sahin"
+},
+{
+"id": 1,
+"tag": "button",
+"html": "Bölümler <span aria-hidden=\"true\">▾</span>"
+},
+{
+"id": 2,
+"tag": "p",
+"html": "Bölümler"
+},
+{
+"id": 3,
+"tag": "li",
+"html": "<a data-sec=\"workshop-hakkinda\" href=\"#workshop-hakkinda\">Workshop Hakkında<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 4,
+"tag": "li",
+"html": "<a data-sec=\"0-hazirlik\" href=\"#0-hazirlik\">0. Hazırlık<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 5,
+"tag": "li",
+"html": "<a data-sec=\"1-end-user-experience-guvenli-kurulum\" href=\"#1-end-user-experience-guvenli-kurulum\">1. End-User Experience: Güvenli Kurulum<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 6,
+"tag": "li",
+"html": "<a data-sec=\"2-end-user-experience-riskli-extension-ve-request-approval\" href=\"#2-end-user-experience-riskli-extension-ve-request-approval\">2. End-User Experience: Riskli Extension ve Request Approval<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 7,
+"tag": "li",
+"html": "<a data-sec=\"3-code-package-prevention-npm\" href=\"#3-code-package-prevention-npm\">3. Code Package Prevention: npm<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 8,
+"tag": "li",
+"html": "<a data-sec=\"4-inventory-shadow-ai-kesfi\" href=\"#4-inventory-shadow-ai-kesfi\">4. Inventory: Shadow AI Keşfi<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 9,
+"tag": "li",
+"html": "<a data-sec=\"5-risk-analizi\" href=\"#5-risk-analizi\">5. Risk Analizi<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 10,
+"tag": "li",
+"html": "<a data-sec=\"6-governance-guardrails-custom-policy-ve-impact-check\" href=\"#6-governance-guardrails-custom-policy-ve-impact-check\">6. Governance: Guardrails, Custom Policy ve Impact Check<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 11,
+"tag": "li",
+"html": "<a data-sec=\"7-remediation\" href=\"#7-remediation\">7. Remediation<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 12,
+"tag": "li",
+"html": "<a data-sec=\"8-runtime-ai-coding-agent\" href=\"#8-runtime-ai-coding-agent\">8. Runtime: AI Coding Agent<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 13,
+"tag": "li",
+"html": "<a data-sec=\"9-threat-intel-threat-center\" href=\"#9-threat-intel-threat-center\">9. Threat Intel: Threat Center<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 14,
+"tag": "li",
+"html": "<a data-sec=\"10-kapanis\" href=\"#10-kapanis\">10. Kapanış<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 15,
+"tag": "li",
+"html": "<a data-sec=\"resources\" href=\"#resources\">Resources<span aria-hidden=\"true\" class=\"done-mark\">✓</span></a>"
+},
+{
+"id": 16,
+"tag": "span",
+"html": "0 / 13 bölüm tamamlandı"
+},
+{
+"id": 17,
+"tag": "div",
+"html": "<a class=\"btn primary\" href=\"https://github.com/aysenursahin/AES-WORKSHOP_V3/raw/main/docs/AES%20Workshop%20Lab%20Rehberi.docx\">Word olarak indir</a>\n<a class=\"btn\" href=\"#\" onclick=\"window.print();return false;\">Yazdır / PDF</a>"
+},
+{
+"id": 18,
+"tag": "p",
+"html": "Created by Aysenur Sahin"
+},
+{
+"id": 19,
+"tag": "h1",
+"html": "Agentic Endpoint Security (AES)<br/>Hands-on Workshop"
+},
+{
+"id": 20,
+"tag": "p",
+"html": "Lab Rehberi: Developer rolünde riskli yazılımların kurulum anında nasıl engellendiğini görün, SOC admin rolünde bu kontrolleri yönetin."
+},
+{
+"id": 21,
+"tag": "h2",
+"html": "Workshop Hakkında"
+},
+{
+"id": 22,
+"tag": "p",
+"html": "Bu workshop'ta Agentic Endpoint Security'yi (AES) iki farklı rolde kullanacaksınız. <strong>Developer</strong> rolünde riskli bir extension ya da paketi kurmaya çalıştığınızda neler olduğunu göreceksiniz. <strong>SOC admin</strong> rolünde ise bu engellemeleri sağlayan ayarları konsolda inceleyip yöneteceksiniz."
+},
+{
+"id": 23,
+"tag": "p",
+"html": "<strong>Senaryo:</strong> Kurgusal <strong>Boğaziçi Teknoloji A.Ş.</strong> şirketinin güvenlik ekibinde çalışıyorsunuz. EDR çalışıyor ve herhangi bir alarm yok. Ancak son altı ayda developer'lar AI coding agent'ları, VS Code ve browser extension'larını ve MCP server'ları kendi başlarına kurmaya başladı. Yönetim şu soruların cevabını istiyor: <em>\"Makinelerde neler kurulu, bunlar nelere erişiyor ve riskli bir şey kurulmak istendiğinde engelleyebiliyor muyuz?\"</em>"
+},
+{
+"id": 24,
+"tag": "caption",
+"html": "Tablo 1: Roller"
+},
+{
+"id": 25,
+"tag": "th",
+"html": "Rol"
+},
+{
+"id": 26,
+"tag": "th",
+"html": "Nerede çalışır"
+},
+{
+"id": 27,
+"tag": "th",
+"html": "Ne yapar"
+},
+{
+"id": 28,
+"tag": "td",
+"html": "<strong>DEVELOPER</strong>"
+},
+{
+"id": 29,
+"tag": "td",
+"html": "Lab makinesi (RDP)"
+},
+{
+"id": 30,
+"tag": "td",
+"html": "Extension ve paket kurar, engellenen kurulumlar için approval talebi gönderir"
+},
+{
+"id": 31,
+"tag": "td",
+"html": "<strong>SOC ADMIN</strong>"
+},
+{
+"id": 32,
+"tag": "td",
+"html": "AES konsolu (browser)"
+},
+{
+"id": 33,
+"tag": "td",
+"html": "Inventory'yi ve riskleri inceler, policy'leri yönetir, approval taleplerini değerlendirir, remediation başlatır"
+},
+{
+"id": 34,
+"tag": "p",
+"html": "Her katılımcı tek başına çalışır ve iki rolü de kendisi üstlenir. Her katılımcıya bir lab makinesi ve AES konsolunda kendi endpoint grubu verilir. Bölüm 8'in sonundaki AI agent örneği eğitmen tarafından canlı olarak gösterilir."
+},
+{
+"id": 35,
+"tag": "caption",
+"html": "Tablo 2: Akış"
+},
+{
+"id": 36,
+"tag": "th",
+"html": "Bölüm"
+},
+{
+"id": 37,
+"tag": "th",
+"html": "Rol"
+},
+{
+"id": 38,
+"tag": "td",
+"html": "Hazırlık"
+},
+{
+"id": 39,
+"tag": "td",
+"html": "DEVELOPER + SOC ADMIN"
+},
+{
+"id": 40,
+"tag": "td",
+"html": "Güvenli extension kurulumu"
+},
+{
+"id": 41,
+"tag": "td",
+"html": "DEVELOPER"
+},
+{
+"id": 42,
+"tag": "td",
+"html": "Riskli extension ve Request Approval"
+},
+{
+"id": 43,
+"tag": "td",
+"html": "DEVELOPER → SOC ADMIN"
+},
+{
+"id": 44,
+"tag": "td",
+"html": "npm paketi engelleme"
+},
+{
+"id": 45,
+"tag": "td",
+"html": "DEVELOPER"
+},
+{
+"id": 46,
+"tag": "td",
+"html": "Inventory: Shadow AI keşfi"
+},
+{
+"id": 47,
+"tag": "td",
+"html": "SOC ADMIN"
+},
+{
+"id": 48,
+"tag": "td",
+"html": "Risk analizi"
+},
+{
+"id": 49,
+"tag": "td",
+"html": "SOC ADMIN"
+},
+{
+"id": 50,
+"tag": "td",
+"html": "Guardrails, policy'ler ve Impact Check"
+},
+{
+"id": 51,
+"tag": "td",
+"html": "SOC ADMIN"
+},
+{
+"id": 52,
+"tag": "td",
+"html": "Remediation"
+},
+{
+"id": 53,
+"tag": "td",
+"html": "SOC ADMIN → DEVELOPER"
+},
+{
+"id": 54,
+"tag": "td",
+"html": "Runtime: AI coding agent"
+},
+{
+"id": 55,
+"tag": "td",
+"html": "SOC ADMIN + Demo"
+},
+{
+"id": 56,
+"tag": "td",
+"html": "Threat Intel: Threat Center"
+},
+{
+"id": 57,
+"tag": "td",
+"html": "SOC ADMIN"
+},
+{
+"id": 58,
+"tag": "td",
+"html": "Kapanış"
+},
+{
+"id": 59,
+"tag": "h2",
+"html": "0. Hazırlık"
+},
+{
+"id": 60,
+"tag": "p",
+"html": "Bu bölümde lab makinenize bağlanacak, AES konsoluna giriş yapacak ve marketplace trafiğini AES üzerinden geçirmek için gereken sertifika ve proxy ayarlarını AES konsolundaki adımları izleyerek kendiniz yapacaksınız."
+},
+{
+"id": 61,
+"tag": "h3",
+"html": "0.1 Lab makinesi"
+},
+{
+"id": 62,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Size verilen RDP adresi ve kullanıcı bilgileriyle lab makinesine bağlanın."
+},
+{
+"id": 63,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Masaüstündeki <strong>Proje Terminali</strong>'ni açın ve makinenin hostname'ini not alın. Konsolda makinenizi bu adla bulacaksınız."
+},
+{
+"id": 64,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 65,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> AES servisinin çalıştığını kontrol edin. Bu rehberdeki tüm komutlar masaüstündeki <strong>komutlar.txt</strong> dosyasında da bulunur:"
+},
+{
+"id": 66,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 67,
+"tag": "p",
+"html": "Servisin durumu <strong>Running</strong> olmalıdır."
+},
+{
+"id": 68,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>AES endpoint'e klasik bir agent olarak kurulmaz. Okunabilir bir script package olarak çalışır ve inventory bilgisini belirli aralıklarla toplar. Script'in içeriğini isterseniz açıp inceleyebilirsiniz."
+},
+{
+"id": 69,
+"tag": "h3",
+"html": "0.2 AES konsoluna giriş"
+},
+{
+"id": 70,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Chrome'da yer imleri çubuğundaki <strong>AES Workshop</strong> klasöründen <strong>Webmail</strong>'i açın (<code>webmail.torsque.com</code>). Size verilen workshop e-posta adresi (ör. <code>student1@torsque.com</code>) ve şifreyle giriş yapın."
+},
+{
+"id": 71,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Yeni bir sekmede <strong>AES Konsol</strong>'u açın. Bunun için <strong>AES Workshop</strong> klasörünü ya da masaüstündeki kısayolu kullanabilirsiniz. SSO yerine e-posta ile giriş seçeneğini kullanın ve aynı workshop e-posta adresini yazın."
+},
+{
+"id": 72,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Webmail sekmesine dönün. AES'ten gelen doğrulama e-postasındaki bağlantıya tıklayın ve konsolun açılmasını bekleyin."
+},
+{
+"id": 73,
+"tag": "p",
+"html": "Giriş yaptığınızda <strong>Dashboard</strong> açılır. Bu ekranda ortamın özeti yer alır: tespit edilen malware'ler, açık remediation'lar ve approval talepleri, toplam öğe ve endpoint sayısı, item type ve platform dağılımı, risk seviyeleri ve AES'in otomatik olarak engellediği öğeler."
+},
+{
+"id": 74,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Endpoint listesinde makinenizi hostname'iyle bulun."
+},
+{
+"id": 75,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Makinenizin size ait gruba (ör. <code>AES-USER01</code>) atandığını kontrol edin. Workshop boyunca oluşturacağınız policy'ler yalnızca bu gruba uygulanır ve diğer katılımcıları etkilemez."
+},
+{
+"id": 76,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>Her katılımcının workshop e-posta adresi farklıdır; yalnızca size verilen adresi kullanın. Doğrulama e-postası birkaç dakika içinde gelmezse webmail'de spam klasörüne bakın."
+},
+{
+"id": 77,
+"tag": "h3",
+"html": "0.3 Network Routing: sertifika ve proxy ayarı"
+},
+{
+"id": 78,
+"tag": "p",
+"html": "Chrome Web Store ve VS Code Marketplace gibi marketplace'lerin trafiği bir PAC dosyasıyla AES proxy'sine yönlendirilir. Proxy'nin bu trafiği inceleyebilmesi için makinenin AES Root CA sertifikasına güvenmesi gerekir. Sertifikayı ve PAC dosyasının adresini AES konsolundan alacaksınız."
+},
+{
+"id": 79,
+"tag": "p",
+"html": "Aşağıdaki şema AES'in nasıl çalıştığını özetler. Endpoint'lerden çıkan marketplace trafiği AES proxy'sinden geçer ve platformdaki policy'lere göre izin verilir ya da engellenir; diğer trafik doğrudan internete gider. Endpoint'teki AES script'i inventory bilgisini platforma gönderir, risk pipeline'ı da marketplace'leri tarayıp risk sonuçlarını platforma iletir. SOC admin tüm bunları konsoldan izler ve yönetir."
+},
+{
+"id": 80,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Konsolda sol alttaki <strong>Settings</strong>'e tıklayın ve <strong>Workspace</strong> altında <strong>Deployment</strong>'ı seçin. <strong>Network Routing</strong> kartında <strong>Update Deployment</strong>'a tıklayın."
+},
+{
+"id": 81,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Açılan pencerenin solunda üç adım görünür: <strong>Set up network integration</strong>, <strong>Establish network trust</strong> ve <strong>Route network traffic</strong>. İlk adımda marketplace trafiğinin AES'e hangi yöntemle yönlendirileceği seçilir. Bu workshop'ta <strong>PAC file</strong> seçeneğini seçin ve <strong>Next</strong>'e tıklayın."
+},
+{
+"id": 82,
+"tag": "p",
+"html": "Lab ortamında ayrı bir proxy ya da SWG çözümü olmadığı için PAC dosyası kullanılıyor. Gerçek ortamlarda marketplace trafiği, kurumda kullanılan SASE/SWG çözümü üzerinden de AES'e yönlendirilebilir:"
+},
+{
+"id": 83,
+"tag": "caption",
+"html": "Tablo 3: Network integration yöntemleri"
+},
+{
+"id": 84,
+"tag": "th",
+"html": "Yöntem"
+},
+{
+"id": 85,
+"tag": "th",
+"html": "Nasıl çalışır"
+},
+{
+"id": 86,
+"tag": "td",
+"html": "<strong>PAC file</strong>"
+},
+{
+"id": 87,
+"tag": "td",
+"html": "Marketplace domain'leri bir PAC dosyasıyla AES proxy'sine yönlendirilir. PAC dosyası tek başına ya da mevcut bir PAC dosyasına eklenerek kullanılabilir; elle, AES script package'ı ile ya da MDM ile dağıtılır."
+},
+{
+"id": 88,
+"tag": "td",
+"html": "<strong>Prisma Access</strong>"
+},
+{
+"id": 89,
+"tag": "td",
+"html": "PAC dosyası, GlobalProtect'in Tunnel + Proxy ya da Proxy (Explicit Proxy) modunda Prisma Access forwarding profile'ı üzerinden dağıtılır."
+},
+{
+"id": 90,
+"tag": "td",
+"html": "<strong>GlobalProtect</strong>"
+},
+{
+"id": 91,
+"tag": "td",
+"html": "GlobalProtect Tunnel-only modunda çalışıyorsa PAC dosyası endpoint'lere ayrıca dağıtılır."
+},
+{
+"id": 92,
+"tag": "td",
+"html": "<strong>Zscaler – Proxy Chaining</strong>"
+},
+{
+"id": 93,
+"tag": "td",
+"html": "Zscaler ZIA'da bir forwarding kuralı tanımlanır ve marketplace domain'leri proxy chaining ile AES proxy'sine iletilir."
+},
+{
+"id": 94,
+"tag": "td",
+"html": "<strong>Netskope – Proxy Chaining</strong>"
+},
+{
+"id": 95,
+"tag": "td",
+"html": "Netskope SWG trafik yolunda kalır ve marketplace domain'lerini upstream proxy olarak AES'e iletir."
+},
+{
+"id": 96,
+"tag": "td",
+"html": "<strong>Netskope – Bypass</strong>"
+},
+{
+"id": 97,
+"tag": "td",
+"html": "Marketplace domain'leri Netskope steering kurallarının dışında bırakılır ve PAC dosyasıyla doğrudan AES proxy'sine yönlendirilir."
+},
+{
+"id": 98,
+"tag": "td",
+"html": "<strong>BlueCoat</strong>"
+},
+{
+"id": 99,
+"tag": "td",
+"html": "Symantec ProxySG'de forwarding kuralları tanımlanır ve marketplace trafiği proxy chaining ile AES'e iletilir."
+},
+{
+"id": 100,
+"tag": "td",
+"html": "<strong>Cloudflare</strong>"
+},
+{
+"id": 101,
+"tag": "td",
+"html": "Cloudflare Zero Trust'ta bir DNS override ya da egress policy ile marketplace domain'leri AES proxy'sine yönlendirilir."
+},
+{
+"id": 102,
+"tag": "td",
+"html": "<strong>Cisco Umbrella</strong>"
+},
+{
+"id": 103,
+"tag": "td",
+"html": "Marketplace domain'leri Umbrella'da External Domains olarak tanımlanıp SWG'nin dışında bırakılır; Umbrella'ya yüklenen PAC dosyası bu trafiği AES'e gönderir."
+},
+{
+"id": 104,
+"tag": "td",
+"html": "<strong>Fortinet</strong>"
+},
+{
+"id": 105,
+"tag": "td",
+"html": "FortiGate, marketplace trafiğini proxy chaining ya da explicit proxy ile AES proxy'sine iletir."
+},
+{
+"id": 106,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>SWG/SASE entegrasyonlarında sertifika için genellikle <strong>Trust via Customer CA (CSR)</strong> yöntemi kullanılır: AES'in sağladığı CSR kurumun kendi root CA'sıyla imzalanır, böylece endpoint'lere ek bir sertifika dağıtmak gerekmez."
+},
+{
+"id": 107,
+"tag": "p",
+"html": "<strong>Sertifika</strong>"
+},
+{
+"id": 108,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Establish network trust</strong> adımında <strong>Quick Trust via Koi Root CA</strong> seçeneğinin seçili olduğunu kontrol edin."
+},
+{
+"id": 109,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Sağdaki <strong>Download the Koi Root CA</strong> adımında <strong>Download CA</strong>'ya tıklayın. Sertifika dosyası <strong>Downloads</strong> klasörüne kaydedilir. Ardından <strong>Next</strong>'e tıklayarak <strong>Deploy the certificate in your environment</strong> adımına geçin; bu adımda sertifikayı makineye yükleyeceksiniz."
+},
+{
+"id": 110,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Masaüstündeki <strong>Proje Terminali</strong>'ni açın. Aşağıdaki komutlarla indirdiğiniz sertifikayı kendi kullanıcınızın (<strong>aes-user</strong>) <strong>Trusted Root Certification Authorities</strong> deposuna ekleyin. Bu işlem için yönetici yetkisi gerekmez:"
+},
+{
+"id": 111,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 112,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 113,
+"tag": "p",
+"html": "Windows sertifikayı yüklemek isteyip istemediğinizi soran bir uyarı gösterir; <strong>Yes</strong>'e tıklayın. Çıktının son satırında <strong>CertUtil: -addstore command completed successfully.</strong> yazmalıdır."
+},
+{
+"id": 114,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Sertifikanın eklendiğini kontrol edin. <strong>Komutla:</strong> aynı terminal penceresinde aşağıdaki komutları çalıştırın:"
+},
+{
+"id": 115,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 116,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 117,
+"tag": "p",
+"html": "Çıktıda sertifikanın <strong>Thumbprint</strong> ve <strong>Subject</strong> bilgileri listelenmelidir. Çıktı boşsa sertifika eklenmemiştir."
+},
+{
+"id": 118,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> <strong>Elle:</strong> <strong>Win + R</strong> tuşlarına basın, <code>certmgr.msc</code> yazıp <strong>Enter</strong>'a basın. <strong>Trusted Root Certification Authorities → Certificates</strong> klasörünü açın ve listede Koi sertifikasını bulun."
+},
+{
+"id": 119,
+"tag": "p",
+"html": "<strong>Proxy (PAC dosyası)</strong>"
+},
+{
+"id": 120,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Konsolda <strong>Next</strong>'e tıklayarak <strong>Route network traffic</strong> adımına geçin. <strong>Before You Begin</strong> bölümünü okuyun: PAC dosyası yalnızca browser'dan yapılan marketplace trafiğini yönlendirir. npm ve pip PAC ayarını kullanmaz; lab makinesinde bu iki araç AES gateway'ine önceden yönlendirilmiştir."
+},
+{
+"id": 121,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Choose a Deployment Method</strong> bölümünde PAC dosyasının adresini sağdaki kopyalama ikonuyla kopyalayın. Bu workshop'ta <strong>Manual</strong> yöntemini kullanacaksınız."
+},
+{
+"id": 122,
+"tag": "li",
+"html": "<strong>Settings → Network &amp; Internet → Proxy</strong> sayfasını açın."
+},
+{
+"id": 123,
+"tag": "li",
+"html": "<strong>Use setup script</strong> seçeneğini açın, <strong>Script address</strong> alanına kopyaladığınız PAC adresini yapıştırın ve <strong>Save</strong>'e tıklayın."
+},
+{
+"id": 124,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Chrome'u tamamen kapatıp yeniden açın ve aşağıdaki adrese gidin:"
+},
+{
+"id": 125,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 126,
+"tag": "span",
+"html": "Beklenen sonuç"
+},
+{
+"id": 127,
+"tag": "p",
+"html": "<strong>You Are Routing Through Koi!</strong> yazan AES doğrulama sayfası görünür. Marketplace trafiğiniz artık AES üzerinden geçiyor."
+},
+{
+"id": 128,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Konsolda <strong>Done</strong>'a tıklayarak Network Routing adımlarını tamamlayın."
+},
+{
+"id": 129,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>Doğrulama sayfası yerine normal marketplace sayfası açılıyorsa PAC adresini ve Chrome'u tamamen kapatıp açtığınızı kontrol edin. Sertifika hatası alıyorsanız sertifikanın Trusted Root deposuna eklendiğini kontrol edin."
+},
+{
+"id": 130,
+"tag": "span",
+"html": "Beklenen sonuç"
+},
+{
+"id": 131,
+"tag": "p",
+"html": "AES servisi çalışıyor, makineniz konsolda kendi grubunuzda görünüyor ve marketplace trafiğiniz AES üzerinden geçiyor."
+},
+{
+"id": 132,
+"tag": "h2",
+"html": "1. End-User Experience: Güvenli Kurulum"
+},
+{
+"id": 133,
+"tag": "p",
+"html": "AES her extension'ı engellemez. Kurumun belirlediği risk eşiğinin altında kalan ve AES threat intelligence'ında sorunlu görünmeyen extension'lar normal şekilde kurulur."
+},
+{
+"id": 134,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Lab makinesinde Chrome'u açın ve Chrome Web Store'a gidin."
+},
+{
+"id": 135,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Yaygın kullanılan, güvenilir bir extension arayın. Örneğin yüz binlerce kullanıcısı olan bir tab manager."
+},
+{
+"id": 136,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> <strong>Add to Chrome</strong>'a tıklayın ve kurulumu tamamlayın."
+},
+{
+"id": 137,
+"tag": "span",
+"html": "Beklenen sonuç"
+},
+{
+"id": 138,
+"tag": "p",
+"html": "Extension normal şekilde kurulur. Herhangi bir uyarı, onay ekranı ya da bekleme olmaz."
+},
+{
+"id": 139,
+"tag": "div",
+"html": "Sıra sizde!"
+},
+{
+"id": 140,
+"tag": "li",
+"html": "Bu extension neden engellenmeden kuruldu?"
+},
+{
+"id": 141,
+"tag": "li",
+"html": "Kurumunuzda çalışanlar Chrome Web Store'dan istedikleri extension'ı kurabiliyor mu? Kuramıyorlarsa bunun için ayda kaç talep açılıyor?"
+},
+{
+"id": 142,
+"tag": "h2",
+"html": "2. End-User Experience: Riskli Extension ve Request Approval"
+},
+{
+"id": 143,
+"tag": "p",
+"html": "Kurum policy'sine uymayan bir extension kurulmak istendiğinde AES kurulumu marketplace sayfasında engeller. Kullanıcı bu noktada güvenlik ekibinden onay isteyebilir. Bu bölümde iki farklı engelleme örneği göreceksiniz: malware olarak işaretlenmiş bir extension ve kurum policy'siyle engellenmiş bir extension."
+},
+{
+"id": 144,
+"tag": "h3",
+"html": "2.1 Malware olarak işaretlenmiş extension"
+},
+{
+"id": 145,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Chrome Web Store'da aşağıdaki extension'ı aratın ve sayfasını açın:"
+},
+{
+"id": 146,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 147,
+"tag": "span",
+"html": "Beklenen sonuç"
+},
+{
+"id": 148,
+"tag": "p",
+"html": "<strong>Add to Chrome</strong> butonunun yerinde <strong>Request Approval</strong> butonu görünür. AES bu extension'ı malware olarak işaretlediği için <strong>Malware Protection</strong> guardrail'i kurulumu engeller."
+},
+{
+"id": 149,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> <strong>Request Approval</strong>'a tıklayın."
+},
+{
+"id": 150,
+"tag": "span",
+"html": "Beklenen sonuç"
+},
+{
+"id": 151,
+"tag": "p",
+"html": "Talep oluşturulmaz ve ekranın sol altında şu uyarı görünür: <em>\"This item can't be approved due to malicious activity. For assistance, contact the security team.\"</em> Extension, AES threat intelligence veritabanında <strong>malware</strong> olarak kayıtlı olduğu için onaya gönderilemez."
+},
+{
+"id": 152,
+"tag": "h3",
+"html": "2.2 Policy ile engellenmiş extension"
+},
+{
+"id": 153,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Chrome Web Store'da aşağıdaki extension'ı aratın ve sayfasını açın:"
+},
+{
+"id": 154,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 155,
+"tag": "span",
+"html": "Beklenen sonuç"
+},
+{
+"id": 156,
+"tag": "p",
+"html": "Bu sayfada da <strong>Add to Chrome</strong> yerine <strong>Request Approval</strong> butonu görünür. Bu extension zararlı değildir; kurumun <strong>global block list</strong>'inde olduğu için engellenir."
+},
+{
+"id": 157,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> <strong>Request Approval</strong>'a tıklayın. Business justification alanına aşağıdaki metni, e-posta alanına workshop e-posta adresinizi yazın ve talebi gönderin:"
+},
+{
+"id": 158,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 159,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> AES konsolunda <strong>Operations → Requests</strong> sayfasına gidin."
+},
+{
+"id": 160,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Gönderdiğiniz talebi bulun. Talepte isteyen kişiyi, extension'ı, gerekçeyi ve e-posta adresini görebilirsiniz."
+},
+{
+"id": 161,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Talebi değerlendirin. Onaylayabilir ya da red nedenini yazarak reddedebilirsiniz."
+},
+{
+"id": 162,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>Approval talepleri Jira veya ServiceNow gibi ticketing sistemlerine de aktarılabilir. Böylece talepler güvenlik ekibinin kullandığı mevcut süreçten yönetilir."
+},
+{
+"id": 163,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>Bu akış, Bölüm 0.3'te yaptığınız proxy ve sertifika ayarı sayesinde çalışır. Marketplace trafiği AES proxy'sinden geçmezse kurulum engellenmez."
+},
+{
+"id": 164,
+"tag": "div",
+"html": "Sıra sizde!"
+},
+{
+"id": 165,
+"tag": "li",
+"html": "Engellenen developer hangi seçeneklere sahipti? Güvenlik ekibi talebi değerlendirirken hangi bilgileri görebildi?"
+},
+{
+"id": 166,
+"tag": "h2",
+"html": "3. Code Package Prevention: npm"
+},
+{
+"id": 167,
+"tag": "p",
+"html": "Developer'lar ve AI coding agent'lar paketleri birkaç saniye içinde ve çoğu zaman kimseye sormadan kurar. Shai-Hulud gibi supply chain saldırıları bu durumdan faydalandı. Bu bölümde AES'in engellenmiş bir paketi, makineye indirilmeden önce nasıl durdurduğunu göreceksiniz."
+},
+{
+"id": 168,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Masaüstündeki <strong>Proje Terminali</strong>'ni açın. Terminal <code>C:\\Projeler\\bogazici-web</code> klasöründe açılır."
+},
+{
+"id": 169,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Önce izin verilen bir paket kurun:"
+},
+{
+"id": 170,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 171,
+"tag": "p",
+"html": "Paket normal şekilde kurulur."
+},
+{
+"id": 172,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Ardından policy ile engellenmiş paketi kurmayı deneyin:"
+},
+{
+"id": 173,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 174,
+"tag": "span",
+"html": "Beklenen sonuç"
+},
+{
+"id": 175,
+"tag": "p",
+"html": "Kurulum <strong>403</strong> hatasıyla durur. Terminalde engelleme nedeni (<strong>POLICY: Blocklist</strong>) ve developer'ın erişim talep edebileceği <strong>REQUEST APPROVAL</strong> bağlantısı görünür."
+},
+{
+"id": 176,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Paketin makineye indirilmediğini kontrol edin:"
+},
+{
+"id": 177,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 178,
+"tag": "p",
+"html": "Sonuç <strong>False</strong> olmalıdır."
+},
+{
+"id": 179,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>Paket istekleri public registry'ye ulaşmadan önce AES proxy'sinde kontrol edilir. Engellenmiş bir paket başka bir paketin dependency'si olarak indirilmeye çalışılsa da engellenir."
+},
+{
+"id": 180,
+"tag": "div",
+"html": "Sıra sizde!"
+},
+{
+"id": 181,
+"tag": "li",
+"html": "Aynı paketi bir AI coding agent kurmaya çalışsaydı ne olurdu?"
+},
+{
+"id": 182,
+"tag": "li",
+"html": "Ortamınızda developer'ların hangi paketleri kurduğunu bugün nasıl takip ediyorsunuz?"
+},
+{
+"id": 183,
+"tag": "h2",
+"html": "4. Inventory: Shadow AI Keşfi"
+},
+{
+"id": 184,
+"tag": "p",
+"html": "EDR, işletim sisteminde çalışan binary'leri izler. Ancak bu binary'lerin içinde çalışan extension'ları, paketleri, MCP server'ları ve AI agent'ları ayrı ayrı göremez. Bu bölümden itibaren SOC admin rolünde çalışacaksınız."
+},
+{
+"id": 185,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> AES konsolunda sol menüden <strong>Non-Binaries → Extensions</strong> sayfasına gidin. Bu sayfada tüm endpoint'lerdeki extension'lar listelenir. Sayfanın üstünde platformlara (Chrome, VS Code, Cursor, Edge vb.) göre extension sayıları yer alır."
+},
+{
+"id": 186,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Query Builder</strong>'da listeyi kendi makinenize göre filtreleyin: alan olarak <strong>Endpoint</strong>'i, koşul olarak <strong>contains</strong>'i seçin, değer alanına hostname'inizi (ör. <code>AES-USER01</code>) yazın ve <strong>Run</strong>'a tıklayın."
+},
+{
+"id": 187,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Listedeki sütunları inceleyin: <strong>Risk level</strong>, <strong>Governed by</strong> (öğeye uygulanan policy ya da liste), <strong>Version</strong>, <strong>Publisher</strong>, <strong>Marketplace</strong>, <strong>Platform</strong> ve <strong>Endpoints</strong> (öğenin kurulu olduğu makine sayısı)."
+},
+{
+"id": 188,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>Query Builder'da birden fazla koşul kullanabilirsiniz. <strong>+ Add Condition</strong> ile risk level, publisher, marketplace veya platform gibi alanlara göre koşul ekleyebilir, <strong>+ Group</strong> ile koşulları gruplayabilirsiniz. Sık kullandığınız sorguları kaydedebilirsiniz."
+},
+{
+"id": 189,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Agentic AI → AI Agents</strong> sayfasında <strong>Claude Code</strong> ve <strong>Codex</strong>'i bulun. Bu araçlar makinede kurulu olduğu hâlde başka hiçbir güvenlik aracında kayıtlı değil. Risk level, item types ve findings sütunlarını inceleyin."
+},
+{
+"id": 190,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Agentic AI → MCP Servers</strong> sayfasında <code>@modelcontextprotocol/server-filesystem</code> server'ını açın. <strong>Supply chain graph</strong>'ta server'ın hangi uygulamalara (Claude, Cursor) bağlı olduğunu ve kaç endpoint'te kurulu olduğunu, <strong>MCP Components</strong> sekmesinde hangi klasöre eriştiğini inceleyin."
+},
+{
+"id": 191,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Non-Binaries → Code Packages</strong> sayfasında Bölüm 3'te kurduğunuz <code>chalk</code> paketini arayın: Query Builder'da <strong>Display Name</strong> / <strong>contains</strong> / <code>chalk</code> seçin ve <strong>Run</strong>'a tıklayın."
+},
+{
+"id": 192,
+"tag": "span",
+"html": "Beklenen sonuç"
+},
+{
+"id": 193,
+"tag": "p",
+"html": "Inventory kategorilere ayrılmış şekilde listelenir. <code>chalk</code> paketi bir sonraki taramadan sonra listede görünür."
+},
+{
+"id": 194,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>Inventory, sürekli çalışan bir izleme aracıyla değil, belirli aralıklarla çalışan bir script ile toplanır. Yeni kurulan bir öğenin listede görünmesi birkaç dakika sürebilir."
+},
+{
+"id": 195,
+"tag": "p",
+"html": "(OPSİYONEL) Query Builder'da <strong>Clear</strong>'a tıklayarak endpoint filtresini kaldırın ve tüm katılımcıların makinelerini birlikte görün. Sağ üstteki <strong>View by</strong> seçeneğini <strong>Item</strong> olarak değiştirin ve aynı öğenin kaç makinede kurulu olduğunu <strong>Endpoints</strong> sütunundan kontrol edin."
+},
+{
+"id": 196,
+"tag": "div",
+"html": "Sıra sizde!"
+},
+{
+"id": 197,
+"tag": "li",
+"html": "Bir npm paketinin ele geçirildiği duyurulsa, bu paketin hangi makinelerde kurulu olduğunu ne kadar sürede bulabilirsiniz?"
+},
+{
+"id": 198,
+"tag": "li",
+"html": "Kurumunuzda kaç farklı AI coding agent kullanılıyor? Bu sorunun cevabını bugün verebiliyor musunuz?"
+},
+{
+"id": 199,
+"tag": "h2",
+"html": "5. Risk Analizi"
+},
+{
+"id": 200,
+"tag": "p",
+"html": "AES; npm, PyPI, Hugging Face, Chrome Web Store ve VS Code Marketplace gibi marketplace'leri düzenli olarak tarar. Öğelerin kodunu sandbox'ta çalıştırır ve LLM tabanlı analizle inceler. Bu bölümde bu analizin sonucunu tek bir öğe üzerinden inceleyeceksiniz."
+},
+{
+"id": 201,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Sol menüden <strong>Endpoints</strong> sayfasına gidin ve makinenize tıklayın. Sağda açılan panelde <strong>Inventory</strong> sekmesini seçin. Makinedeki tüm öğeler <strong>risk level</strong>'a göre sıralanır."
+},
+{
+"id": 202,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Critical</strong> ya da <strong>High</strong> seviyesindeki bir extension'a tıklayın."
+},
+{
+"id": 203,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Risk raporunu inceleyin ve aşağıdaki soruları cevaplayın:"
+},
+{
+"id": 204,
+"tag": "li",
+"html": "Extension hangi permission'ları istiyor?"
+},
+{
+"id": 205,
+"tag": "li",
+"html": "Publisher kim ve ne kadar güvenilir?"
+},
+{
+"id": 206,
+"tag": "li",
+"html": "Hangi dış servislerle iletişim kuruyor?"
+},
+{
+"id": 207,
+"tag": "li",
+"html": "Risk skorunu en çok hangi finding artırıyor?"
+},
+{
+"id": 208,
+"tag": "span",
+"html": "Beklenen sonuç"
+},
+{
+"id": 209,
+"tag": "p",
+"html": "Risk raporunda permission'lar, publisher bilgisi ve risk skorunu oluşturan finding'ler yer alır."
+},
+{
+"id": 210,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>EDR açısından bu extension, imzalı ve güvenilir bir process'in (<code>Code.exe</code> ya da <code>chrome.exe</code>) parçasıdır. EDR bu process'in çalışmasına izin verir, ancak process içinde hangi extension'ın ne yaptığını göremez."
+},
+{
+"id": 211,
+"tag": "div",
+"html": "Sıra sizde!"
+},
+{
+"id": 212,
+"tag": "li",
+"html": "Bir developer bu extension'ı kurmak isteseydi ekibiniz bu kadar bilgiye sahip olarak mı karar verirdi?"
+},
+{
+"id": 213,
+"tag": "li",
+"html": "Bu analizi elle yapmak ne kadar sürerdi? Extension'ın yeni bir versiyonu çıktığında analizi tekrarlamanız gerekir miydi?"
+},
+{
+"id": 214,
+"tag": "h2",
+"html": "6. Governance: Guardrails, Custom Policy ve Impact Check"
+},
+{
+"id": 215,
+"tag": "p",
+"html": "Bölüm 1–3'te karşılaştığınız engellemeler bu bölümde göreceğiniz ayarlardan kaynaklanır. Önce hazır gelen guardrail'leri, ardından policy'leri inceleyeceksiniz."
+},
+{
+"id": 216,
+"tag": "h3",
+"html": "6.1 Guardrails"
+},
+{
+"id": 217,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Sol menüden <strong>Governance → Guardrails</strong> sayfasına gidin."
+},
+{
+"id": 218,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Aşağıdaki guardrail'leri sayfada bulun ve açıklamalarını okuyun:"
+},
+{
+"id": 219,
+"tag": "caption",
+"html": "Tablo 4: Guardrail'ler"
+},
+{
+"id": 220,
+"tag": "th",
+"html": "Guardrail"
+},
+{
+"id": 221,
+"tag": "th",
+"html": "Açıklama"
+},
+{
+"id": 222,
+"tag": "td",
+"html": "<strong>Malware Protection</strong>"
+},
+{
+"id": 223,
+"tag": "td",
+"html": "AES risk engine'inin zararlı olarak işaretlediği öğelerin kurulumunu engeller, kurulu olanları otomatik olarak kaldırır. npm ve PyPI'de yalnızca kurulumu engeller."
+},
+{
+"id": 224,
+"tag": "td",
+"html": "<strong>Scan-First Protection</strong>"
+},
+{
+"id": 225,
+"tag": "td",
+"html": "Yeni yayımlanan bir öğenin, AES risk engine taraması tamamlanana kadar (genellikle birkaç dakika ile birkaç saat arası) kurulmasına izin vermez."
+},
+{
+"id": 226,
+"tag": "td",
+"html": "<strong>Version Update Cooldown</strong>"
+},
+{
+"id": 227,
+"tag": "td",
+"html": "Kurulu öğelerin yeni versiyonlarına geçişini belirlenen süre kadar erteler. Varsayılan süre npm için 1 gün, diğer marketplace'ler için 2 gündür."
+},
+{
+"id": 228,
+"tag": "td",
+"html": "<strong>Delayed Access</strong>"
+},
+{
+"id": 229,
+"tag": "td",
+"html": "Yeni yayımlanan öğelerin kurulumunu, yayım tarihinden itibaren belirlenen gün sayısı dolana kadar engeller."
+},
+{
+"id": 230,
+"tag": "td",
+"html": "<strong>Delisted Monitoring</strong>"
+},
+{
+"id": 231,
+"tag": "td",
+"html": "Marketplace'ten kaldırılmış (delisted) öğeleri tespit eder ve Remediation sayfasında listeler."
+},
+{
+"id": 232,
+"tag": "td",
+"html": "<strong>Sideloading Monitoring</strong>"
+},
+{
+"id": 233,
+"tag": "td",
+"html": "Hiçbir marketplace'te bulunmayan, elle kurulmuş öğeleri tespit eder. Bu öğeleri engellemez, Remediation sayfasında listeler."
+},
+{
+"id": 234,
+"tag": "td",
+"html": "<strong>MCP Registry Enforcement</strong>"
+},
+{
+"id": 235,
+"tag": "td",
+"html": "Resmi GitHub MCP Registry dışından kurulan MCP server'ları otomatik olarak kaldırır. Şu an VS Code için geçerlidir."
+},
+{
+"id": 236,
+"tag": "td",
+"html": "<strong>Block Execution from Risky Paths</strong>"
+},
+{
+"id": 237,
+"tag": "td",
+"html": "<code>/tmp</code> gibi kullanıcının yazma yetkisi olan riskli dizinlerden binary çalıştırılmasını engeller (macOS)."
+},
+{
+"id": 238,
+"tag": "td",
+"html": "<strong>Agent Credential Access Restriction</strong>"
+},
+{
+"id": 239,
+"tag": "td",
+"html": "AI coding agent'ların SSH anahtarları, cloud credential'ları, API token'ları ve <code>.env</code> gibi gizli bilgi içeren dosyaları okumasını engeller."
+},
+{
+"id": 240,
+"tag": "td",
+"html": "<strong>Agent Destructive Command Restriction</strong>"
+},
+{
+"id": 241,
+"tag": "td",
+"html": "AI coding agent'ların <code>rm -rf</code>, <code>DROP DATABASE</code>, <code>terraform destroy</code>, <code>git push --force</code> gibi geri alınamayan komutları çalıştırmasını engeller."
+},
+{
+"id": 242,
+"tag": "td",
+"html": "<strong>Agent Source Code Exfiltration Protection</strong>"
+},
+{
+"id": 243,
+"tag": "td",
+"html": "AI coding agent'ların onaylı listede olmayan git repository'lerine push, clone, fetch veya pull yapmasını engeller."
+},
+{
+"id": 244,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Malware Protection</strong> satırının sağındaki <strong>ayar ikonuna</strong> tıklayın. Açılan pencerede <strong>Alert-only mode</strong>, <strong>Superior to 'Global allow list'</strong> ve <strong>Endpoints groups</strong> ayarlarını inceleyin."
+},
+{
+"id": 245,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Impact check</strong> satırında <strong>Run</strong>'a tıklayın. Guardrail'in kriterlerine uyan ve endpoint'lerde kurulu olan öğeler listelenir."
+},
+{
+"id": 246,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>Guardrail'ler endpoint grubu bazında uygulanabilir. Bazı guardrail'ler önce <strong>alert-only</strong> modda açılabilir; bu modda engelleme yapılmaz, yalnızca uyarı oluşturulur. Malware Protection, Scan-First ve Delayed Access gibi guardrail'leri açmadan önce <strong>Impact Check</strong> ile kaç öğenin ve endpoint'in etkileneceğini görebilirsiniz."
+},
+{
+"id": 247,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>Version Update Cooldown, supply chain saldırılarına karşı önemli bir önlemdir. Güvenilir bir paketin zararlı bir versiyonu yayımlandığında, AI agent'lar ve otomatik güncellemeler bu versiyonu hemen indirebilir. Bekleme süresi, zararlı versiyonun topluluk ve AES risk engine'i tarafından tespit edilmesi için zaman tanır."
+},
+{
+"id": 248,
+"tag": "h3",
+"html": "6.2 Marketplace Modes ve Global Lists"
+},
+{
+"id": 249,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Sol menüden <strong>Governance → Policies → App Control</strong> sayfasına gidin. Sayfanın üstünde <strong>Marketplaces mode</strong>, <strong>Policies</strong> ve <strong>Global lists</strong> sekmeleri bulunur."
+},
+{
+"id": 250,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Marketplaces mode</strong> sekmesinde marketplace'ler için <strong>block by default</strong> ayarını bulun. Bu mod açık olduğunda ilgili marketplace'ten yalnızca izin verilmiş öğeler kurulabilir."
+},
+{
+"id": 251,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Global lists</strong> sekmesini açın. <strong>Blocklist</strong>'te Bölüm 2.2'de engellenen <strong>Checker Plus for Gmail</strong>'i (Chrome Web Store) ve Bölüm 3'te engellenen <code>buttoncontent</code> paketini (npm) bulun."
+},
+{
+"id": 252,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>Global list'ler custom policy'lerden önce uygulanır. Bir öğeyi tüm kurumda engellemek için <strong>Blocklist</strong>'e, her durumda izin vermek için <strong>Allowlist</strong>'e eklersiniz."
+},
+{
+"id": 253,
+"tag": "h3",
+"html": "6.3 Custom Policy ve Impact Check"
+},
+{
+"id": 254,
+"tag": "p",
+"html": "<strong>AI Runtime policy</strong>"
+},
+{
+"id": 255,
+"tag": "p",
+"html": "App Control policy'leri hangi öğelerin <strong>kurulabileceğini</strong> belirler. AI Runtime policy'leri ise kurulu bir AI coding agent'ın çalışırken <strong>neler yapabileceğini</strong> belirler: hangi skill'leri ve MCP tool'ları kullanabileceğini, hangi işlemler için kullanıcıdan onay alınacağını."
+},
+{
+"id": 256,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Sol menüden <strong>Governance → Policies → AI Runtime</strong> sayfasına gidin ve sağ üstteki <strong>Create policy</strong>'ye tıklayın."
+},
+{
+"id": 257,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Scope</strong> bölümünde <strong>Agents</strong> alanından policy'nin uygulanacağı agent'ları (Cursor, Claude Code, Codex, GitHub Copilot vb.), <strong>Endpoint groups</strong> alanından kendi grubunuzu seçin."
+},
+{
+"id": 258,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Action</strong> bölümünde aksiyonu seçin: <strong>Block</strong> işlemi engeller, <strong>Ask</strong> işlemden önce kullanıcıdan onay ister, <strong>Allow</strong> işleme izin verir."
+},
+{
+"id": 259,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Rules</strong> bölümünde kuralın hangi <strong>Skill</strong> ya da <strong>MCP tool</strong> için geçerli olacağını yazın. <strong>Add condition</strong> ile koşul, <strong>Add rule</strong> ile yeni kural ekleyebilirsiniz."
+},
+{
+"id": 260,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Policy'yi kaydetmeden önce <strong>Run impact check</strong>'e tıklayarak etkisini görün."
+},
+{
+"id": 261,
+"tag": "p",
+"html": "<strong>Templates</strong>"
+},
+{
+"id": 262,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>AI Runtime</strong> sayfasında sağ üstteki <strong>Templates</strong>'e tıklayın."
+},
+{
+"id": 263,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Şablonları aksiyona (<strong>Ask</strong>, <strong>Block</strong>, <strong>High impact</strong>) ya da kategoriye (<strong>Secrets &amp; Credentials</strong>, <strong>Cloud &amp; infra</strong>, <strong>Destructive actions</strong>, <strong>Code &amp; repo</strong> vb.) göre filtreleyin. Her şablonda aksiyon, MITRE ATLAS karşılığı ve kısa bir açıklama yer alır."
+},
+{
+"id": 264,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Control credential file access</strong> şablonunu açıp inceleyin. Bu şablon, bir AI agent <code>.env</code> ya da cloud config gibi credential içeren bir dosyayı okumak istediğinde developer'dan onay ister."
+},
+{
+"id": 265,
+"tag": "div",
+"html": "Sıra sizde!"
+},
+{
+"id": 266,
+"tag": "li",
+"html": "Impact Check olmasaydı yeni bir policy'nin etkisini devreye almadan önce nasıl ölçerdiniz?"
+},
+{
+"id": 267,
+"tag": "li",
+"html": "Kurumunuzda ilk olarak hangi policy'yi oluştururdunuz?"
+},
+{
+"id": 268,
+"tag": "h2",
+"html": "7. Remediation"
+},
+{
+"id": 269,
+"tag": "p",
+"html": "Yeni kurulumları engellemek tek başına yeterli değildir; makinelerde zaten kurulu olan riskli öğelerin de kaldırılması gerekir. Bu bölümde riskli bir öğeyi konsoldan endpoint'ten kaldıracaksınız."
+},
+{
+"id": 270,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Sol menüden <strong>Governance → Remediation</strong> sayfasına gidin. Sayfada dört sekme bulunur: <strong>Review</strong> (incelenmeyi bekleyen öğeler), <strong>Pending</strong> (kaldırma işlemi başlatılmış öğeler), <strong>Remediated</strong> (kaldırılmış öğeler) ve <strong>Dismissed</strong> (göz ardı edilen öğeler)."
+},
+{
+"id": 271,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Review</strong> sekmesinde <strong>Hostname</strong> sütununa bakarak kendi makinenizdeki öğeleri bulun. <strong>Reason</strong> sütunu, öğenin hangi kural ya da guardrail nedeniyle listelendiğini gösterir."
+},
+{
+"id": 272,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Makinenizde kurulu ve risk seviyesi yüksek bir öğe seçin (ör. <strong>Youtube Unblocked</strong>) ve satırın sağındaki <strong>Remediate</strong> butonuna tıklayın."
+},
+{
+"id": 273,
+"tag": "span",
+"html": "Beklenen sonuç"
+},
+{
+"id": 274,
+"tag": "p",
+"html": "Öğenin durumu <strong>Pending</strong> olur. Endpoint'teki script bir sonraki çalışmasında öğeyi kaldırır ve durum <strong>Remediated</strong> olarak güncellenir."
+},
+{
+"id": 275,
+"tag": "li",
+"html": "<span class=\"role role-dev\">DEVELOPER</span> Lab makinesinde öğenin kaldırıldığını doğrulayın. Öğe bir VS Code extension'ıysa aşağıdaki komutu çalıştırın ve listede olmadığını kontrol edin:"
+},
+{
+"id": 276,
+"tag": "button",
+"html": "Kopyala"
+},
+{
+"id": 277,
+"tag": "p",
+"html": "Browser extension'ıysa Chrome'da <code>chrome://extensions</code> sayfasını açın."
+},
+{
+"id": 278,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Remediation kaydında işlemi kimin başlattığını, hangi makinede ve hangi versiyon için yapıldığını kontrol edin."
+},
+{
+"id": 279,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>Kaldırma işlemi, endpoint'teki script'in bir sonraki çalışmasında gerçekleşir. Öğe hemen kaldırılmazsa birkaç dakika bekleyin."
+},
+{
+"id": 280,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>İlgili guardrail'ler açıksa, zararlı olduğu tespit edilen ya da marketplace'ten kaldırılan öğeler otomatik olarak kaldırılabilir."
+},
+{
+"id": 281,
+"tag": "div",
+"html": "Sıra sizde!"
+},
+{
+"id": 282,
+"tag": "li",
+"html": "Yüz makinede kurulu riskli bir extension'ı bugün nasıl kaldırıyorsunuz? Bu iş kaç kişiyle ve ne kadar sürede yapılıyor?"
+},
+{
+"id": 283,
+"tag": "h2",
+"html": "8. Runtime: AI Coding Agent"
+},
+{
+"id": 284,
+"tag": "p",
+"html": "AI coding agent'lar kullanıcının yetkileriyle komut çalıştırır, dosya okur ve dış servislere istek gönderir. AES, agent bir tool'u çalıştırmadan <strong>hemen önce</strong> (pre-tool hook) devreye girer ve ilgili policy'ye göre işlemi engeller ya da kullanıcıdan onay ister."
+},
+{
+"id": 285,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Sol menüden <strong>Agentic AI → AIDR</strong> sayfasına gidin. Bu sayfada AI coding agent'ların oturumları ve yaptıkları işlemler listelenir. Sayfanın üstünde agent'lara (Claude Code, Codex, GitHub Copilot) göre oturum sayıları yer alır."
+},
+{
+"id": 286,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Her oturum için şu sütunları inceleyin: <strong>Agent</strong>, <strong>Endpoint</strong>, <strong>Actions</strong> (agent'ın yaptığı işlem türleri: File access, Command, Web access), <strong>Governed by</strong> (oturuma uygulanan guardrail ya da runtime policy), <strong>Events</strong> ve <strong>Duration</strong>."
+},
+{
+"id": 287,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Governed by</strong> sütununda bir guardrail ya da policy bulunan oturumlardan birine tıklayın. Agent'ın çalıştırmaya çalıştığı komutları, okuduğu dosyaları ve engellenen işlemleri inceleyin."
+},
+{
+"id": 288,
+"tag": "p",
+"html": "<strong>Demo:</strong> Eğitmen, lab makinesinde bir AI agent'tan proje klasöründeki <code>.env</code> dosyasını okumasını ve <code>curl</code> ile dış bir adrese istek göndermesini isteyecek. Bu işlemler, Bölüm 6.3'te gördüğünüz <strong>AI Runtime</strong> policy'leri ve agent guardrail'leri tarafından denetlenir."
+},
+{
+"id": 289,
+"tag": "span",
+"html": "Beklenen sonuç"
+},
+{
+"id": 290,
+"tag": "p",
+"html": "İşlem çalışmadan engellenir. Engelleme mesajı agent'ın chat penceresinde görünür ve developer buradan istisna talebinde bulunabilir. Oturum AIDR sayfasında da listelenir."
+},
+{
+"id": 291,
+"tag": "p",
+"html": "<span class=\"note-tag\">Not</span>Lab makinesindeki <code>.env</code> dosyası yalnızca örnek değerler içerir; gerçek bir parola ya da anahtar yoktur."
+},
+{
+"id": 292,
+"tag": "div",
+"html": "Sıra sizde!"
+},
+{
+"id": 293,
+"tag": "li",
+"html": "EDR bu olayı nasıl değerlendirirdi? (İpucu: İmzalı ve güvenilir bir process, bilinen bir adrese HTTPS isteği gönderiyor.)"
+},
+{
+"id": 294,
+"tag": "li",
+"html": "Kurumunuzda AI agent'ların hangi işlemleri için <strong>Block</strong>, hangileri için <strong>Ask</strong> kullanırdınız?"
+},
+{
+"id": 295,
+"tag": "h2",
+"html": "9. Threat Intel: Threat Center"
+},
+{
+"id": 296,
+"tag": "p",
+"html": "AES araştırma ekibi, marketplace'lerde ortaya çıkan yeni supply chain saldırılarını sürekli takip eder. Threat Center'da bu tehditleri ve ortamınızın bunlardan etkilenip etkilenmediğini görebilirsiniz."
+},
+{
+"id": 297,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Sol menüden <strong>Threat Intel → Threat Center</strong> sayfasına gidin."
+},
+{
+"id": 298,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Recent active threats detected</strong> bölümünde son tespit edilen zararlı öğeleri inceleyin. Her kartta öğenin adı, publisher'ı ve <strong>Malware</strong> etiketi yer alır."
+},
+{
+"id": 299,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> <strong>Latest supply chain threats</strong> listesinde güncel supply chain saldırılarını inceleyin. Her kayıtta tarih, başlık, kısa açıklama ve etiket (<strong>Security update</strong>, <strong>Flash security update</strong>) bulunur."
+},
+{
+"id": 300,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Sağ üstteki <strong>Any impact status</strong> filtresinden <strong>Compromised</strong>'ı seçin. Liste, ortamınızda etkilenen öğe bulunan tehditleri gösterecek şekilde daralır."
+},
+{
+"id": 301,
+"tag": "li",
+"html": "<span class=\"role role-soc\">SOC ADMIN</span> Bir kayda tıklayın ve saldırının detaylarını ve ortamınızdaki etkisini inceleyin."
+},
+{
+"id": 302,
+"tag": "div",
+"html": "Sıra sizde!"
+},
+{
+"id": 303,
+"tag": "li",
+"html": "Yeni bir supply chain saldırısı duyurulduğunda ortamınızın etkilenip etkilenmediğini bugün nasıl ve ne kadar sürede tespit ediyorsunuz?"
+},
+{
+"id": 304,
+"tag": "h2",
+"html": "10. Kapanış"
+},
+{
+"id": 305,
+"tag": "p",
+"html": "Bu workshop'ta aynı senaryoyu iki rolde uyguladınız. Developer olarak riskli öğelerin kurulum anında engellendiğini ve onay talep edebildiğinizi gördünüz. SOC admin olarak ortamda neler kurulu olduğunu, bunların risklerini ve uygulanan kontrolleri tek bir konsoldan incelediniz."
+},
+{
+"id": 306,
+"tag": "caption",
+"html": "Tablo 5: Sorular ve cevapları"
+},
+{
+"id": 307,
+"tag": "th",
+"html": "Soru"
+},
+{
+"id": 308,
+"tag": "th",
+"html": "Cevabın bulunduğu bölüm"
+},
+{
+"id": 309,
+"tag": "td",
+"html": "Makinelerde neler kurulu?"
+},
+{
+"id": 310,
+"tag": "td",
+"html": "Bölüm 4 – Inventory"
+},
+{
+"id": 311,
+"tag": "td",
+"html": "Bunlar nelere erişiyor ve ne kadar riskli?"
+},
+{
+"id": 312,
+"tag": "td",
+"html": "Bölüm 5 – Risk analizi"
+},
+{
+"id": 313,
+"tag": "td",
+"html": "Riskli bir şey kurulmak istendiğinde engelleyebiliyor muyuz?"
+},
+{
+"id": 314,
+"tag": "td",
+"html": "Bölüm 1–3 ve 6 – Kurulum anında prevention"
+},
+{
+"id": 315,
+"tag": "td",
+"html": "Zaten kurulu olan riskli öğeleri nasıl kaldırırız?"
+},
+{
+"id": 316,
+"tag": "td",
+"html": "Bölüm 7 – Remediation"
+},
+{
+"id": 317,
+"tag": "td",
+"html": "AI agent'lar ne yapıyor?"
+},
+{
+"id": 318,
+"tag": "td",
+"html": "Bölüm 8 – Runtime"
+},
+{
+"id": 319,
+"tag": "td",
+"html": "Yeni bir supply chain saldırısından etkilendik mi?"
+},
+{
+"id": 320,
+"tag": "td",
+"html": "Bölüm 9 – Threat Center"
+},
+{
+"id": 321,
+"tag": "h3",
+"html": "Mevcut ortamınızla entegrasyon"
+},
+{
+"id": 322,
+"tag": "li",
+"html": "AES mevcut EDR'ınızın yerine geçmez; EDR'ın göremediği extension, paket, MCP server ve AI agent katmanını izler. Standalone olarak EDR'ınızla birlikte çalışabilir."
+},
+{
+"id": 323,
+"tag": "li",
+"html": "Cortex XDR kullanıyorsanız AES, XDR agent'ı üzerinden <strong>XDR + AES</strong> ya da <strong>AES only</strong> modunda etkinleştirilebilir."
+},
+{
+"id": 324,
+"tag": "li",
+"html": "Marketplace trafiği, Prisma Access gibi mevcut SWG çözümleri üzerinden AES'e yönlendirilebilir."
+},
+{
+"id": 325,
+"tag": "div",
+"html": "Sıra sizde!"
+},
+{
+"id": 326,
+"tag": "li",
+"html": "Bugün gördüğünüz özelliklerden hangisi kurumunuzda şu an karşılanmayan bir ihtiyaca cevap veriyor?"
+},
+{
+"id": 327,
+"tag": "li",
+"html": "Kendi developer makinelerinizde kaç MCP server ve AI agent bulunacağını tahmin ediyorsunuz?"
+},
+{
+"id": 328,
+"tag": "p",
+"html": "<strong>Sonraki adım:</strong> Kendi ortamınızdaki durumu görmek için birkaç developer makinesiyle iki haftalık bir PoC planlayabiliriz."
+},
+{
+"id": 329,
+"tag": "h2",
+"html": "Resources"
+},
+{
+"id": 330,
+"tag": "li",
+"html": "<a href=\"https://www2.paloaltonetworks.com/resources/techbriefs/koi-agentic-endpoint-security\" rel=\"noopener\" target=\"_blank\">Agentic Endpoint Security (AES) – Solution Brief</a>"
+},
+{
+"id": 331,
+"tag": "li",
+"html": "<a href=\"https://docs-cortex.paloaltonetworks.com/p/KoiAES\" rel=\"noopener\" target=\"_blank\">AES dokümantasyonu (Cortex Docs)</a>"
+},
+{
+"id": 332,
+"tag": "li",
+"html": "<a href=\"https://docs.koi.ai/guides/governance-best-practices/code-package-prevention\" rel=\"noopener\" target=\"_blank\">Code package prevention dokümantasyonu</a>"
+},
+{
+"id": 333,
+"tag": "li",
+"html": "<a href=\"https://www.paloaltonetworks.com/blog/2026/02/securing-the-agentic-endpoint/\" rel=\"noopener\" target=\"_blank\">Securing the Agentic Endpoint (Palo Alto Networks Blog)</a>"
+},
+{
+"id": 334,
+"tag": "li",
+"html": "<a href=\"https://www.paloaltonetworks.com/blog/security-operations/a-quarter-of-innovation-with-koi-agentic-endpoint-security/\" rel=\"noopener\" target=\"_blank\">A Quarter of Innovation with Agentic Endpoint Security (Palo Alto Networks Blog)</a>"
+},
+{
+"id": 335,
+"tag": "li",
+"html": "<a href=\"https://www.paloaltonetworks.com/blog/security-operations/cortex-xdr-6-0/\" rel=\"noopener\" target=\"_blank\">Introducing Cortex XDR 6.0: Built for Endpoints. Ready for Agents.</a>"
+},
+{
+"id": 336,
+"tag": "span",
+"html": "<b>Cortex</b> by Palo Alto Networks · AES Workshop · Lab Rehberi · Created by Aysenur Sahin"
+}
+]
